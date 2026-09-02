@@ -18,7 +18,7 @@ const AdminApp = {
     AuthService.onAuthStateChanged(async (user) => {
       this.checkAuth();
       if (user) {
-        window.location.reload();
+        await this.refreshData();
       }
     });
 
@@ -45,7 +45,7 @@ const AdminApp = {
           await AuthService.login(email, password);
           showToast('تم تسجيل الدخول بنجاح! مرحباً بك في لوحة الإدارة 🛡️', 'success');
           this.checkAuth();
-          window.location.reload();
+          await this.refreshData();
         } catch (err) {
           showToast(err.message || 'فشل تسجيل الدخول. تأكد من البريد وكلمة المرور.', 'error');
         } finally {
@@ -352,7 +352,7 @@ const AdminApp = {
         form.reset();
         const lbl = document.getElementById('file-count-label');
         if (lbl) lbl.textContent = 'اضغط هنا لاختيار صور من جهازك';
-        window.location.reload();
+        await this.refreshData();
         this.switchTab('properties');
       } catch (err) {
         showToast(err.message || 'حدث خطأ أثناء الحفظ', 'error');
@@ -414,7 +414,7 @@ const AdminApp = {
     if (confirm('هل أنت متأكد من رغبتك في حذف هذا العقار نهائياً؟')) {
       await DataService.deleteProperty(id);
       showToast('تم حذف العقار بنجاح.', 'info');
-      window.location.reload();
+      await this.refreshData();
     }
   },
 
@@ -452,7 +452,7 @@ const AdminApp = {
 
     await DataService.addProperty(newProp);
     showToast('تم اعتماد الوحدة ونشرها بنجاح في الموقع!', 'success');
-    window.location.reload();
+    await this.refreshData();
     this.switchTab('properties');
   },
 
