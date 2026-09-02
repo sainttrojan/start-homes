@@ -1,60 +1,81 @@
-# Start Homes
+# Start Homes - المنصة العقارية الذكية 🏠
 
-Start Homes is a modern real estate platform that enables users to browse, search, and view properties, as well as submit viewing inquiries and property listing requests. It features a secure administrative dashboard for managing listings and customer interactions.
+منصة عقارية متكاملة (CRM + واجهة مستخدم) تم بناؤها باستخدام تقنيات حديثة وخفيفة، لتعمل بكفاءة عالية وبدون أي تكاليف تشغيلية (100% Free Architecture).
 
-## Architecture
+## 🚀 التقنيات المستخدمة
 
-This project is built as a static web application that interfaces directly with Firebase Firestore. It utilizes Firestore Security Rules to ensure that all database operations are secure. The architecture eliminates the need for a dedicated backend server, making it ideal for high-performance deployment on Edge networks like Cloudflare Pages.
+- **الواجهة الأمامية (Frontend):** HTML5, Vanilla JavaScript, Tailwind CSS (عبر CDN)
+- **قاعدة البيانات (Database):** Firebase Firestore (NoSQL)
+- **المصادقة والأمان (Authentication):** Firebase Authentication
+- **استضافة الصور (Image Hosting):** ImgBB API (مجاني ولا يتطلب بطاقة ائتمانية)
+- **الاستضافة (Hosting):** Cloudflare Pages (مرتبط بـ GitHub)
 
-- Frontend: HTML5, CSS3, Vanilla JavaScript, Tailwind CSS.
-- Backend/Database: Firebase Firestore (NoSQL).
-- Authentication: Firebase Authentication.
-- Hosting: Cloudflare Pages.
+## 🌟 مميزات النظام
 
-## Features
+1. **لوحة تحكم (CRM) متكاملة:**
+   - إضافة/تعديل/حذف العقارات بتفاصيل مالية دقيقة (إجمالي، مدفوع، أوفر، متبقي، أقساط).
+   - استقبال وتصفح رسائل العملاء (Inquiries).
+   - استقبال طلبات بيع العقارات من الملاك (Seller Requests) وإمكانية نشرها مباشرة بضغطة زر.
+   - حماية كاملة للوحة التحكم؛ لا يمكن الوصول إليها أو إرسال بيانات لقاعدة البيانات إلا بعد تسجيل الدخول كمدير.
 
-- Public Property Listings: Browse properties with dynamic filtering by city, type, and price.
-- Dynamic Property Details: View comprehensive information and image galleries for individual properties.
-- Lead Generation: Securely submit viewing requests and property sale requests.
-- Secure Admin Dashboard: Authenticated dashboard for managing properties and viewing client inquiries.
+2. **نظام استضافة الصور الذكي:**
+   - بدلاً من استخدام Firebase Storage الذي يتطلب تفعيل نظام الفوترة (Blaze Plan) ببطاقة بنكية، تم دمج نظام **ImgBB API**.
+   - يتم رفع الصور مباشرة من جهازك إلى خوادم ImgBB، ويتم حفظ الرابط السريع للصورة داخل قاعدة بيانات Firebase تلقائياً.
 
-## Security Implementation
+3. **واجهة مستخدم عصرية (Dark/Light Mode):**
+   - تصميم متجاوب (Responsive) يعمل على جميع الشاشات.
+   - نظام فلترة وبحث متقدم.
+   - نظام "المفضلة" لحفظ العقارات في ذاكرة المتصفح.
 
-The application employs a secure client-side model:
-- The Firebase config variables are public by design.
-- All data access is strictly governed by Firestore Security Rules.
-- Public users are restricted to read-only access for properties and create-only access for their own inquiries.
-- Administrative capabilities (Insert, Update, Delete) require a valid authenticated session.
+## 🛠️ إعداد المشروع لأول مرة (Setup)
 
-## Deployment
+لكي يعمل النظام بشكل صحيح، يجب ربطه بقاعدة البيانات وسيرفر الصور الخاص بك:
 
-The application is designed to be hosted on any static hosting provider.
+### 1. إعداد Firebase
+1. اذهب إلى [Firebase Console](https://console.firebase.google.com/).
+2. أنشئ مشروعاً جديداً، وقم بتفعيل **Firestore Database** و **Authentication** (اختر Email/Password).
+3. في تبويب **Firestore Database**، اذهب إلى (Rules) والصق قواعد الأمان التالية:
+   ```javascript
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       match /properties/{document=**} {
+         allow read: if true;
+         allow write: if request.auth != null;
+       }
+       match /inquiries/{document=**} {
+         allow read: if request.auth != null;
+         allow write: if true;
+       }
+       match /seller_requests/{document=**} {
+         allow read: if request.auth != null;
+         allow write: if true;
+       }
+     }
+   }
+   ```
+4. اذهب إلى إعدادات المشروع (Project Settings) وانسخ كود `firebaseConfig`.
 
-1. Cloudflare Pages (Recommended): Connect this repository to Cloudflare Pages and deploy. No build step is required.
-2. GitHub Pages / Vercel / Netlify: Serve the root directory as a static site.
+### 2. إعداد ImgBB للصور
+1. اذهب إلى [ImgBB API](https://api.imgbb.com/).
+2. سجل حساباً مجانياً واضغط على (Create App) لتحصل على `API Key`.
 
-All database interactions will automatically utilize the configured Firebase endpoints initialized from the Admin panel settings.
+### 3. ربط الموقع
+1. افتح صفحة `admin.html` في موقعك.
+2. في شاشة تسجيل الدخول، اضغط على **(⚙️ تحديث إعدادات Firebase)**.
+3. الصق كود `firebaseConfig` ومفتاح `ImgBB API Key` واضغط **حفظ**.
+4. سيتم تحديث الصفحة، وبعدها يمكنك تسجيل الدخول باستخدام الإيميل والباسورد الخاصين بك كمدير.
 
-## Database Security Rules
+## 📁 هيكل الملفات الرئيسي
 
-To replicate the required database architecture and secure your data, navigate to the Rules tab in your Firebase Firestore console and apply the following rules:
+- `index.html` - الصفحة الرئيسية (الرؤية، البحث السريع).
+- `latest-units.html` - صفحة تصفح أحدث الوحدات والفلترة.
+- `property-details.html` - صفحة تفاصيل العقار (تعرض التقسيمة المالية، الصور، الوصف).
+- `sell-property.html` - صفحة طلبات الملاك لعرض عقاراتهم للبيع.
+- `admin.html` - لوحة تحكم الإدارة (CRM).
+- `js/firebase-config.js` - محرك الاتصال بقاعدة البيانات ورفع الصور لـ ImgBB.
+- `js/admin.js` - منطق لوحة التحكم (إضافة العقارات، عرض الطلبات).
 
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /properties/{document} {
-      allow read: if true;
-      allow write: if request.auth != null;
-    }
-    match /inquiries/{document} {
-      allow create: if true;
-      allow read, update, delete: if request.auth != null;
-    }
-    match /seller_requests/{document} {
-      allow create: if true;
-      allow read, update, delete: if request.auth != null;
-    }
-  }
-}
-```
+## 💡 ملاحظات التطوير
+- تم استخدام `localStorage` لحفظ إعدادات Firebase محلياً لسهولة التحديث من لوحة الإدارة دون الحاجة لتعديل الأكواد البرمجية مباشرة.
+- يتم تجاوز الكاش (Cache Busting) في الروابط (مثل `?v=FINAL_VERSION`) لضمان وصول التحديثات للمتصفح فوراً.
