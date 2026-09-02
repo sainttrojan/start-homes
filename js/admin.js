@@ -347,7 +347,8 @@ const AdminApp = {
           showToast('تمت إضافة العقار بنجاح!', 'success');
         }
 
-        form.reset();
+        const form = document.getElementById('property-form');
+        if (form && form.tagName === 'FORM') form.reset();
         const lbl = document.getElementById('file-count-label');
         if (lbl) lbl.textContent = 'اضغط هنا لاختيار صور من جهازك';
         await this.refreshData();
