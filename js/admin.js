@@ -408,25 +408,27 @@ const AdminApp = {
   },
 
   bindSupabaseSettings() {
-    const urlInput = document.getElementById('supabase-url-input');
-    const keyInput = document.getElementById('supabase-key-input');
-    const saveBtn = document.getElementById('supabase-save-btn');
-    const copySqlBtn = document.getElementById('copy-sql-btn');
+    const configInput = document.getElementById('firebase-config-input');
+    const saveBtn = document.getElementById('firebase-save-btn');
 
-    if (urlInput) urlInput.value = SupabaseConfig.getUrl();
-    if (keyInput) keyInput.value = SupabaseConfig.getAnonKey();
+    if (configInput) {
+      const cfg = FirebaseConfig.getConfig();
+      if(cfg) configInput.value = JSON.stringify(cfg, null, 2);
+    }
 
     if (saveBtn) {
       saveBtn.addEventListener('click', async () => {
-        const url = urlInput.value.trim();
-        const key = keyInput.value.trim();
-        SupabaseConfig.saveCredentials(url, key);
-        this.checkConnectionStatus();
-        await this.refreshData();
-        showToast('تم حفظ بيانات الربط مع Supabase بنجاح!', 'success');
+        try {
+          FirebaseConfig.saveConfig(configInput.value);
+          FirebaseConfig.initApp();
+          this.checkConnectionStatus();
+          await this.refreshData();
+          showToast('تم حفظ إعدادات Firebase بنجاح!', 'success');
+        } catch(e) {
+          showToast(e.message, 'error');
+        }
       });
     }
-
     if (copySqlBtn) {
       copySqlBtn.addEventListener('click', () => {
         navigator.clipboard.writeText(SUPABASE_SQL_SCHEMA);
@@ -439,7 +441,7 @@ const AdminApp = {
     const badge = document.getElementById('supabase-status-badge');
     if (!badge) return;
 
-    if (SupabaseConfig.isConnected()) {
+    if (FirebaseConfig.isConnected()) {
       badge.innerHTML = `
         <span class="w-2.5 h-2.5 rounded-full bg-success-green inline-block animate-pulse"></span>
         <span class="text-success-green font-bold">متصل بـ Supabase Cloud</span>
