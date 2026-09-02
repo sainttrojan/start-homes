@@ -284,7 +284,8 @@ const AdminApp = {
     const form = document.getElementById('property-form');
     if (!form) return;
 
-    form.addEventListener('submit', async (e) => {
+    const submitBtn = document.getElementById('form-submit-btn');
+    if(submitBtn) submitBtn.addEventListener('click', async (e) => {
       e.preventDefault();
 
       const submitBtn = document.getElementById('form-submit-btn');
