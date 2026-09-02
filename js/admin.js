@@ -15,9 +15,13 @@ const AdminApp = {
     this.bindSupabaseSettings();
     this.bindPropertyForm();
 
-    if (this.checkAuth()) {
-      await this.refreshData();
-    }
+    AuthService.onAuthStateChanged(async (user) => {
+      this.checkAuth();
+      if (user) {
+        await this.refreshData();
+      }
+    });
+
     this.checkConnectionStatus();
   },
 
