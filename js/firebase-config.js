@@ -11,15 +11,21 @@ const FirebaseConfig = {
   getConfig() {
     try {
       const cfg = localStorage.getItem(this.KEY_CONFIG);
-      return cfg ? JSON.parse(cfg) : null;
+      const parsed = cfg ? JSON.parse(cfg) : null;
+      return parsed;
     } catch(e) { return null; }
+  },
+
+  getImgbbKey() {
+    const cfg = this.getConfig();
+    return cfg ? cfg.imgbbKey : null;
   },
 
   isConnected() {
     return this.getConfig() !== null;
   },
 
-  saveConfig(configStr) {
+  saveConfig(configStr, imgbbKey = '') {
     // Basic extraction from pasted config
     let apiKey = (configStr.match(/apiKey:\s*["']([^"']+)["']/) || [])[1];
     let authDomain = (configStr.match(/authDomain:\s*["']([^"']+)["']/) || [])[1];
@@ -39,7 +45,7 @@ const FirebaseConfig = {
 
     if (!apiKey || !projectId) throw new Error("بيانات Firebase غير صالحة");
     
-    localStorage.setItem(this.KEY_CONFIG, JSON.stringify({ apiKey, authDomain, projectId }));
+    localStorage.setItem(this.KEY_CONFIG, JSON.stringify({ apiKey, authDomain, projectId, imgbbKey }));
     return true;
   },
 
@@ -102,25 +108,36 @@ const DataService = {
   },
 
   
-  get storage() {
-    return firebase.storage();
-  },
 
   async uploadImages(files) {
-    if (!firebase.apps.length || !files || files.length === 0) return [];
+    if (!files || files.length === 0) return [];
     
+    const imgbbKey = FirebaseConfig.getImgbbKey();
+    if (!imgbbKey) {
+      throw new Error("يرجى إدخال مفتاح ImgBB في الإعدادات أولاً لرفع الصور.");
+    }
+
     const uploadedUrls = [];
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      const filename = `properties/${Date.now()}_${Math.random().toString(36).substring(7)}_${file.name}`;
-      const storageRef = this.storage.ref(filename);
+      const formData = new FormData();
+      formData.append('image', file);
       
       try {
-        const snapshot = await storageRef.put(file);
-        const url = await snapshot.ref.getDownloadURL();
-        uploadedUrls.push(url);
+        const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (data && data.success) {
+          uploadedUrls.push(data.data.url);
+        } else {
+          console.error('ImgBB Error:', data);
+          throw new Error("فشل رفع بعض الصور، تأكد من صحة مفتاح ImgBB");
+        }
       } catch (e) {
         console.error('Error uploading file:', e);
+        throw e;
       }
     }
     return uploadedUrls;

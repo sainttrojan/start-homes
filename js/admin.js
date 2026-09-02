@@ -459,19 +459,28 @@ const AdminApp = {
     const configInput = document.getElementById('firebase-config-input');
     const saveBtn = document.getElementById('firebase-save-btn');
 
+    const imgbbInput = document.getElementById('imgbb-key-input');
+    
     if (configInput) {
       const cfg = FirebaseConfig.getConfig();
-      if(cfg) configInput.value = JSON.stringify(cfg, null, 2);
+      if(cfg) {
+        configInput.value = JSON.stringify({
+          apiKey: cfg.apiKey,
+          authDomain: cfg.authDomain,
+          projectId: cfg.projectId
+        }, null, 2);
+        if (imgbbInput && cfg.imgbbKey) imgbbInput.value = cfg.imgbbKey;
+      }
     }
 
     if (saveBtn) {
       saveBtn.addEventListener('click', async () => {
         try {
-          FirebaseConfig.saveConfig(configInput.value);
+          FirebaseConfig.saveConfig(configInput.value, imgbbInput ? imgbbInput.value.trim() : '');
           FirebaseConfig.initApp();
           this.checkConnectionStatus();
           await this.refreshData();
-          showToast('تم حفظ إعدادات Firebase بنجاح!', 'success');
+          showToast('تم حفظ إعدادات Firebase و ImgBB بنجاح!', 'success');
         } catch(e) {
           showToast(e.message, 'error');
         }
