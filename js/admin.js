@@ -281,14 +281,12 @@ const AdminApp = {
   },
 
   bindPropertyForm() {
-    const form = document.getElementById('property-form');
-    if (!form) return;
-
-    const submitBtn = document.getElementById('form-submit-btn');
-    if(submitBtn) submitBtn.addEventListener('click', async (e) => {
+    document.addEventListener('click', async (e) => {
+      const btn = e.target.closest('#form-submit-btn');
+      if (!btn) return;
+      
       e.preventDefault();
-
-      const submitBtn = document.getElementById('form-submit-btn');
+      const submitBtn = btn;
       const spinner = document.getElementById('submit-spinner');
       if (submitBtn) submitBtn.disabled = true;
       if (spinner) spinner.classList.remove('hidden');
