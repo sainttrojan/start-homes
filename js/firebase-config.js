@@ -64,7 +64,7 @@ const FirebaseConfig = {
 };
 
 // Initialize early
-FirebaseConfig.initApp();
+try { FirebaseConfig.initApp(); } catch(e) { console.error("Firebase init failed:", e); }
 
 // Auth Service
 const AuthService = {
