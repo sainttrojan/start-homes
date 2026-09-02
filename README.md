@@ -1,40 +1,40 @@
-# Start Homes - المنصة العقارية الذكية 🏠
+# Start Homes - Real Estate Platform
 
-منصة عقارية متكاملة (CRM + واجهة مستخدم) تم بناؤها باستخدام تقنيات حديثة وخفيفة، لتعمل بكفاءة عالية وبدون أي تكاليف تشغيلية (100% Free Architecture).
+A fully functional real estate platform built with modern, lightweight technologies to operate efficiently with a serverless architecture.
 
-## 🚀 التقنيات المستخدمة
+## Technologies Used
 
-- **الواجهة الأمامية (Frontend):** HTML5, Vanilla JavaScript, Tailwind CSS (عبر CDN)
-- **قاعدة البيانات (Database):** Firebase Firestore (NoSQL)
-- **المصادقة والأمان (Authentication):** Firebase Authentication
-- **استضافة الصور (Image Hosting):** ImgBB API (مجاني ولا يتطلب بطاقة ائتمانية)
-- **الاستضافة (Hosting):** Cloudflare Pages (مرتبط بـ GitHub)
+- **Frontend:** HTML5, Vanilla JavaScript, Tailwind CSS (via CDN)
+- **Database:** Firebase Firestore (NoSQL)
+- **Authentication:** Firebase Authentication
+- **Image Hosting:** ImgBB API (Direct client-to-cloud upload)
+- **Hosting:** Cloudflare Pages (Integrated with GitHub)
 
-## 🌟 مميزات النظام
+## Key Features
 
-1. **لوحة تحكم (CRM) متكاملة:**
-   - إضافة/تعديل/حذف العقارات بتفاصيل مالية دقيقة (إجمالي، مدفوع، أوفر، متبقي، أقساط).
-   - استقبال وتصفح رسائل العملاء (Inquiries).
-   - استقبال طلبات بيع العقارات من الملاك (Seller Requests) وإمكانية نشرها مباشرة بضغطة زر.
-   - حماية كاملة للوحة التحكم؛ لا يمكن الوصول إليها أو إرسال بيانات لقاعدة البيانات إلا بعد تسجيل الدخول كمدير.
+1. **Admin Dashboard:**
+   - Add, edit, and delete properties with detailed financial breakdowns (total price, paid amount, overprice, remaining amount, installments).
+   - View customer inquiries and viewing requests.
+   - Review seller requests and publish them directly to the platform.
+   - Fully secured using Firebase Authentication and Firestore Security Rules.
 
-2. **نظام استضافة الصور الذكي:**
-   - بدلاً من استخدام Firebase Storage الذي يتطلب تفعيل نظام الفوترة (Blaze Plan) ببطاقة بنكية، تم دمج نظام **ImgBB API**.
-   - يتم رفع الصور مباشرة من جهازك إلى خوادم ImgBB، ويتم حفظ الرابط السريع للصورة داخل قاعدة بيانات Firebase تلقائياً.
+2. **Image Management:**
+   - Integrates with ImgBB API to handle image uploads without relying on Firebase Storage billing.
+   - Images are uploaded directly from the browser, and the resulting URLs are stored in Firestore.
 
-3. **واجهة مستخدم عصرية (Dark/Light Mode):**
-   - تصميم متجاوب (Responsive) يعمل على جميع الشاشات.
-   - نظام فلترة وبحث متقدم.
-   - نظام "المفضلة" لحفظ العقارات في ذاكرة المتصفح.
+3. **User Interface:**
+   - Responsive design with Dark/Light mode support.
+   - Advanced filtering and search system for properties.
+   - Local storage-based "Favorites" system for users to save properties.
 
-## 🛠️ إعداد المشروع لأول مرة (Setup)
+## Setup Instructions
 
-لكي يعمل النظام بشكل صحيح، يجب ربطه بقاعدة البيانات وسيرفر الصور الخاص بك:
+To deploy and run the system, it must be connected to a Firebase project and an ImgBB account.
 
-### 1. إعداد Firebase
-1. اذهب إلى [Firebase Console](https://console.firebase.google.com/).
-2. أنشئ مشروعاً جديداً، وقم بتفعيل **Firestore Database** و **Authentication** (اختر Email/Password).
-3. في تبويب **Firestore Database**، اذهب إلى (Rules) والصق قواعد الأمان التالية:
+### 1. Firebase Configuration
+1. Navigate to the Firebase Console and create a new project.
+2. Enable **Firestore Database** and **Authentication** (Email/Password provider).
+3. In the Firestore Rules tab, apply the following security rules:
    ```javascript
    rules_version = '2';
    service cloud.firestore {
@@ -54,28 +54,24 @@
      }
    }
    ```
-4. اذهب إلى إعدادات المشروع (Project Settings) وانسخ كود `firebaseConfig`.
+4. Copy the `firebaseConfig` object from your Project Settings.
 
-### 2. إعداد ImgBB للصور
-1. اذهب إلى [ImgBB API](https://api.imgbb.com/).
-2. سجل حساباً مجانياً واضغط على (Create App) لتحصل على `API Key`.
+### 2. ImgBB Configuration
+1. Create a free account at ImgBB API.
+2. Generate an API Key for image uploads.
 
-### 3. ربط الموقع
-1. افتح صفحة `admin.html` في موقعك.
-2. في شاشة تسجيل الدخول، اضغط على **(⚙️ تحديث إعدادات Firebase)**.
-3. الصق كود `firebaseConfig` ومفتاح `ImgBB API Key` واضغط **حفظ**.
-4. سيتم تحديث الصفحة، وبعدها يمكنك تسجيل الدخول باستخدام الإيميل والباسورد الخاصين بك كمدير.
+### 3. Application Linkage
+1. Open the `admin.html` page in your deployed environment.
+2. On the login screen, click the "Update Firebase Settings" button.
+3. Paste the `firebaseConfig` JSON and the `ImgBB API Key`.
+4. Click Save. The application will refresh and connect to your database. You can now log in using your Firebase Authentication credentials.
 
-## 📁 هيكل الملفات الرئيسي
+## Directory Structure
 
-- `index.html` - الصفحة الرئيسية (الرؤية، البحث السريع).
-- `latest-units.html` - صفحة تصفح أحدث الوحدات والفلترة.
-- `property-details.html` - صفحة تفاصيل العقار (تعرض التقسيمة المالية، الصور، الوصف).
-- `sell-property.html` - صفحة طلبات الملاك لعرض عقاراتهم للبيع.
-- `admin.html` - لوحة تحكم الإدارة (CRM).
-- `js/firebase-config.js` - محرك الاتصال بقاعدة البيانات ورفع الصور لـ ImgBB.
-- `js/admin.js` - منطق لوحة التحكم (إضافة العقارات، عرض الطلبات).
-
-## 💡 ملاحظات التطوير
-- تم استخدام `localStorage` لحفظ إعدادات Firebase محلياً لسهولة التحديث من لوحة الإدارة دون الحاجة لتعديل الأكواد البرمجية مباشرة.
-- يتم تجاوز الكاش (Cache Busting) في الروابط (مثل `?v=FINAL_VERSION`) لضمان وصول التحديثات للمتصفح فوراً.
+- `index.html` - Homepage and quick search.
+- `latest-units.html` - Property browsing and filtering page.
+- `property-details.html` - Individual property details and financial breakdown.
+- `sell-property.html` - Form for owners to submit properties for sale.
+- `admin.html` - Secure administration dashboard.
+- `js/firebase-config.js` - Database connection and image upload logic.
+- `js/admin.js` - Administrative operations and dashboard state management.
