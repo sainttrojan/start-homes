@@ -18,7 +18,7 @@ const AdminApp = {
     AuthService.onAuthStateChanged(async (user) => {
       this.checkAuth();
       if (user) {
-        await this.refreshData();
+        window.location.reload();
       }
     });
 
@@ -45,7 +45,7 @@ const AdminApp = {
           await AuthService.login(email, password);
           showToast('تم تسجيل الدخول بنجاح! مرحباً بك في لوحة الإدارة 🛡️', 'success');
           this.checkAuth();
-          await this.refreshData();
+          window.location.reload();
         } catch (err) {
           showToast(err.message || 'فشل تسجيل الدخول. تأكد من البريد وكلمة المرور.', 'error');
         } finally {
@@ -352,7 +352,7 @@ const AdminApp = {
         form.reset();
         const lbl = document.getElementById('file-count-label');
         if (lbl) lbl.textContent = 'اضغط هنا لاختيار صور من جهازك';
-        await this.refreshData();
+        window.location.reload();
         this.switchTab('properties');
       } catch (err) {
         showToast(err.message || 'حدث خطأ أثناء الحفظ', 'error');
@@ -414,7 +414,7 @@ const AdminApp = {
     if (confirm('هل أنت متأكد من رغبتك في حذف هذا العقار نهائياً؟')) {
       await DataService.deleteProperty(id);
       showToast('تم حذف العقار بنجاح.', 'info');
-      await this.refreshData();
+      window.location.reload();
     }
   },
 
@@ -452,7 +452,7 @@ const AdminApp = {
 
     await DataService.addProperty(newProp);
     showToast('تم اعتماد الوحدة ونشرها بنجاح في الموقع!', 'success');
-    await this.refreshData();
+    window.location.reload();
     this.switchTab('properties');
   },
 
@@ -480,7 +480,7 @@ const AdminApp = {
           FirebaseConfig.saveConfig(configInput.value, imgbbInput ? imgbbInput.value.trim() : '');
           FirebaseConfig.initApp();
           this.checkConnectionStatus();
-          await this.refreshData();
+          window.location.reload();
           showToast('تم حفظ إعدادات Firebase و ImgBB بنجاح!', 'success');
         } catch(e) {
           showToast(e.message, 'error');
