@@ -444,7 +444,7 @@ const AdminApp = {
     if (FirebaseConfig.isConnected()) {
       badge.innerHTML = `
         <span class="w-2.5 h-2.5 rounded-full bg-success-green inline-block animate-pulse"></span>
-        <span class="text-success-green font-bold">متصل بـ Supabase Cloud</span>
+        <span class="text-success-green font-bold">متصل بـ Firebase Cloud</span>
       `;
     } else {
       badge.innerHTML = `

@@ -15,6 +15,10 @@ const FirebaseConfig = {
     } catch(e) { return null; }
   },
 
+  isConnected() {
+    return this.getConfig() !== null;
+  },
+
   saveConfig(configStr) {
     // Basic extraction from pasted config
     let apiKey = (configStr.match(/apiKey:\s*["']([^"']+)["']/) || [])[1];
