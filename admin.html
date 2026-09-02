@@ -420,48 +420,42 @@
 
         <div class="space-y-4 bg-surface-container-low p-5 rounded-2xl border border-border-gray">
           <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">كود إعدادات Firebase (firebaseConfig)</label>
+            <textarea id="firebase-config-input" placeholder="ألصق كود الإعدادات هنا..." class="input-field w-full p-3 rounded-xl text-xs font-mono min-h-[150px]" dir="ltr"></textarea>
+          </div>
 
-          <button id="supabase-save-btn" class="btn-primary px-6 py-3 rounded-xl text-xs font-bold flex items-center gap-2">
+          <button id="firebase-save-btn" class="btn-primary px-6 py-3 rounded-xl text-xs font-bold flex items-center gap-2">
             <span class="material-symbols-outlined text-base">check</span>
-            <span>حفظ واختبار الاتصال</span>
+            <span>حفظ وتحديث الاتصال</span>
           </button>
         </div>
 
-        <!-- SQL Schema 1-Click Copy -->
-        <div class="border-t border-border-gray pt-6">
-          <div class="flex justify-between items-center mb-3">
-            <div>
-              <h3 class="font-bold text-sm text-on-surface">كود SQL لإنشاء الجداول في Supabase</h3>
-              <p class="text-xs text-secondary">انسخ هذا الكود وضعه في الـ SQL Editor داخل حسابك على Supabase واضغط Run.</p>
-            </div>
-            <button id="copy-sql-btn" class="btn-secondary px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1">
-              <span class="material-symbols-outlined text-base">content_copy</span>
-              <span>نسخ كود SQL</span>
-            </button>
+        <div class="bg-surface-container p-5 rounded-2xl border border-border-gray">
+          <div class="mb-3">
+            <h3 class="font-bold text-sm text-on-surface">ملاحظات قواعد الأمان Firestore Rules</h3>
+            <p class="text-xs text-secondary mt-1">تأكد من وضع القواعد التالية في تبويب Rules في Firestore لضمان الحماية:</p>
           </div>
-          <pre class="bg-inverse-surface text-surface-container p-4 rounded-xl text-[11px] font-mono overflow-x-auto max-h-72"><code>-- Start Homes - Production Security & Row Level Security (RLS)
-alter table public.properties enable row level security;
-alter table public.inquiries enable row level security;
-alter table public.seller_requests enable row level security;
-
--- 1. Properties Policies
-create policy "Anyone can view properties" on public.properties for select using (true);
-create policy "Admins can insert properties" on public.properties for insert to authenticated with check (true);
-create policy "Admins can update properties" on public.properties for update to authenticated using (true) with check (true);
-create policy "Admins can delete properties" on public.properties for delete to authenticated using (true);
-
--- 2. Inquiries Policies
-create policy "Public can submit viewing inquiries" on public.inquiries for insert with check (true);
-create policy "Only Admins can read inquiries" on public.inquiries for select to authenticated using (true);
-create policy "Only Admins can update inquiries" on public.inquiries for update to authenticated using (true);
-
--- 3. Seller Requests Policies
-create policy "Public can submit property to sell" on public.seller_requests for insert with check (true);
-create policy "Only Admins can read seller requests" on public.seller_requests for select to authenticated using (true);
-create policy "Only Admins can update seller requests" on public.seller_requests for update to authenticated using (true);</code></pre>
+          <div class="relative">
+            <pre class="bg-[#1e1e1e] text-[#d4d4d4] p-4 rounded-xl text-[11px] font-mono overflow-x-auto text-left" dir="ltr"><code>rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /properties/{document} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    match /inquiries/{document} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+    match /seller_requests/{document} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+  }
+}</code></pre>
+          </div>
         </div>
       </div>
-
     </main>
 
   </div>
