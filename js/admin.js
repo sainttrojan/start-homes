@@ -281,12 +281,12 @@ const AdminApp = {
   },
 
   bindPropertyForm() {
-    document.addEventListener('click', async (e) => {
-      const btn = e.target.closest('#form-submit-btn');
-      if (!btn) return;
+    // Left empty since we now use inline onclick
+  },
+
+  async submitPropertyForm(submitBtn) {
+      if (!submitBtn) return;
       
-      e.preventDefault();
-      const submitBtn = btn;
       const spinner = document.getElementById('submit-spinner');
       if (submitBtn) submitBtn.disabled = true;
       if (spinner) spinner.classList.remove('hidden');
@@ -354,11 +354,11 @@ const AdminApp = {
         this.switchTab('properties');
       } catch (err) {
         showToast(err.message || 'حدث خطأ أثناء الحفظ', 'error');
+          alert('خطأ: ' + (err.message || 'حدث خطأ أثناء الحفظ.'));
       } finally {
         if (submitBtn) submitBtn.disabled = false;
         if (spinner) spinner.classList.add('hidden');
       }
-    });
   },
 
   editProperty(id) {
