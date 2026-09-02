@@ -61,18 +61,18 @@ const PropertyDetailsApp = {
     if (!prop) return;
 
     // Document Title
-    document.title = `${prop.title} | Start Homes`;
+    document.title = `${prop.address} | Start Homes`;
 
     // Breadcrumbs
     const bcCity = document.getElementById('bc-city');
     const bcTitle = document.getElementById('bc-title');
     if (bcCity) bcCity.textContent = prop.city || 'أحدث الوحدات';
-    if (bcTitle) bcTitle.textContent = prop.title || 'تفاصيل العقار';
+    if (bcTitle) bcTitle.textContent = prop.address || 'تفاصيل العقار';
 
     // Title & Subtitle
-    const titleEl = document.getElementById('prop-title');
+    const titleEl = document.getElementById('prop.address');
     const subtitleEl = document.getElementById('prop-subtitle');
-    if (titleEl) titleEl.textContent = prop.title || 'وحدة سكنية مميزة';
+    if (titleEl) titleEl.textContent = prop.address || 'وحدة سكنية مميزة';
     if (subtitleEl) subtitleEl.textContent = prop.subtitle || `${prop.city} - ${prop.district}`;
 
     // Price & Terms
@@ -89,7 +89,7 @@ const PropertyDetailsApp = {
     
     if (mainImg) {
       mainImg.src = imagesList[0];
-      mainImg.alt = prop.title;
+      mainImg.alt = prop.address;
     }
 
     // Gallery Thumbnails
@@ -120,6 +120,24 @@ const PropertyDetailsApp = {
     if (specsArea) specsArea.textContent = `${prop.area || 140} م²`;
     if (specsView) specsView.textContent = prop.viewType || 'إطلالة مفتوحة';
 
+
+    // Financials
+    const elTotal = document.getElementById('spec-total-price');
+    const elPaid = document.getElementById('spec-paid');
+    const elOver = document.getElementById('spec-over');
+    const elRemain = document.getElementById('spec-remaining');
+    const elDeposit = document.getElementById('spec-deposit');
+    const elAnnual = document.getElementById('spec-annual-inst');
+    const elMonthly = document.getElementById('spec-monthly-inst');
+
+    if (elTotal) elTotal.textContent = formatEGP(prop.totalPrice || 0);
+    if (elPaid) elPaid.textContent = formatEGP(prop.paidAmount || 0);
+    if (elOver) elOver.textContent = formatEGP(prop.overPrice || 0);
+    if (elRemain) elRemain.textContent = formatEGP(prop.remainingAmount || 0);
+    if (elDeposit) elDeposit.textContent = formatEGP(prop.deposit || 0);
+    if (elAnnual) elAnnual.textContent = formatEGP(prop.annualInstallment || 0);
+    if (elMonthly) elMonthly.textContent = formatEGP(prop.monthlyInstallment || 0);
+
     // Description
     const descEl = document.getElementById('prop-description');
     if (descEl) {
@@ -146,13 +164,13 @@ const PropertyDetailsApp = {
     // WhatsApp Direct Buttons
     const waButtons = document.querySelectorAll('.prop-wa-lead-btn');
     waButtons.forEach(btn => {
-      btn.onclick = () => openWhatsAppLead(prop.title, prop.id);
+      btn.onclick = () => openWhatsAppLead(prop.address, prop.id);
     });
 
     // Schedule Viewing Buttons
     const viewButtons = document.querySelectorAll('.prop-schedule-view-btn');
     viewButtons.forEach(btn => {
-      btn.onclick = () => openViewingModal(prop.title);
+      btn.onclick = () => openViewingModal(prop.address);
     });
 
     // Phone Call Buttons

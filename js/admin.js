@@ -172,9 +172,9 @@ const AdminApp = {
       <tr class="border-b border-border-gray hover:bg-surface-container-low/50 transition-colors">
         <td class="p-4">
           <div class="flex items-center gap-3">
-            <img src="${p.images[0]}" alt="${p.title}" class="w-12 h-12 rounded-lg object-cover border border-border-gray shrink-0">
+            <img src="${p.images[0]}" alt="${p.address || p.title || p.purpose}" class="w-12 h-12 rounded-lg object-cover border border-border-gray shrink-0">
             <div>
-              <div class="font-bold text-on-surface text-sm line-clamp-1">${p.title}</div>
+              <div class="font-bold text-on-surface text-sm line-clamp-1">${p.address || p.title || p.purpose}</div>
               <div class="text-xs text-secondary">${p.city} - ${p.district}</div>
             </div>
           </div>
@@ -282,50 +282,79 @@ const AdminApp = {
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
-      const imagesInput = document.getElementById('form-prop-images')?.value.trim();
-      const imagesList = imagesInput ? imagesInput.split('\n').map(s => s.trim()).filter(Boolean) : [
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuDREq9v_PqViSCUwgZ7YBgeZR7WsnKChX9iXdisD0gEgPTnpkagUc0fh4ByL6yb_-KHbhlEEfivbDwUM9igkKubwmBRuOsAxWaLDNPZlu_gw_ubPV5BiutCnR4x-dpMqEfH7ozGZA2zrPj-IDb5fKzfuEFDTtRX9bG4DSR8JeKThzdHMkZPKGv1yT6wes38fIqs9pYEig0GOY6_DznutNL89wG_zLN0o0i1jZtBvqAj6Vh1qtJ9tdWB"
-      ];
 
-      const propData = {
-        title: document.getElementById('form-prop-title').value.trim(),
-        subtitle: document.getElementById('form-prop-subtitle').value.trim(),
-        city: document.getElementById('form-prop-city').value,
-        district: document.getElementById('form-prop-district').value.trim(),
-        type: document.getElementById('form-prop-type').value,
-        price: Number(document.getElementById('form-prop-price').value),
-        originalPrice: Number(document.getElementById('form-prop-original-price').value) || Number(document.getElementById('form-prop-price').value),
-        downPayment: Number(document.getElementById('form-prop-downpayment').value) || 0,
-        installmentPlan: document.getElementById('form-prop-plan').value.trim() || 'كاش',
-        bedrooms: Number(document.getElementById('form-prop-beds').value) || 3,
-        bathrooms: Number(document.getElementById('form-prop-baths').value) || 2,
-        area: Number(document.getElementById('form-prop-area').value) || 140,
-        floor: document.getElementById('form-prop-floor').value.trim() || 'الدور الثاني',
-        finishing: document.getElementById('form-prop-finishing').value,
-        viewType: document.getElementById('form-prop-view').value.trim() || 'فيو مفتوح',
-        isDeal: document.getElementById('form-prop-is-deal').checked,
-        discountPercent: Number(document.getElementById('form-prop-discount').value) || 0,
-        isExclusive: document.getElementById('form-prop-is-exclusive').checked,
-        isNew: document.getElementById('form-prop-is-new').checked,
-        isReady: true,
-        legalCheck: true,
-        images: imagesList,
-        description: document.getElementById('form-prop-desc').value.trim()
-      };
+      const submitBtn = document.getElementById('form-submit-btn');
+      const spinner = document.getElementById('submit-spinner');
+      if (submitBtn) submitBtn.disabled = true;
+      if (spinner) spinner.classList.remove('hidden');
 
-      if (this.editingPropertyId) {
-        await DataService.updateProperty(this.editingPropertyId, propData);
-        showToast('تم تحديث بيانات العقار بنجاح!', 'success');
-        this.editingPropertyId = null;
-      } else {
-        await DataService.addProperty(propData);
-        showToast('تم إضافة العقار الجديد بنجاح إلى قاعدة البيانات!', 'success');
+      try {
+        let uploadedImages = [];
+        const fileInput = document.getElementById('form-images');
+        if (fileInput && fileInput.files.length > 0) {
+          uploadedImages = await DataService.uploadImages(fileInput.files);
+        }
+
+        const propData = {
+          purpose: document.getElementById('form-purpose') ? document.getElementById('form-purpose').value : '',
+          address: document.getElementById('form-address') ? document.getElementById('form-address').value.trim() : '',
+          ownerName: document.getElementById('form-owner-name') ? document.getElementById('form-owner-name').value.trim() : '',
+          ownerPhone1: document.getElementById('form-owner-phone1') ? document.getElementById('form-owner-phone1').value.trim() : '',
+          ownerPhone2: document.getElementById('form-owner-phone2') ? document.getElementById('form-owner-phone2').value.trim() : '',
+
+          phase: document.getElementById('form-phase') ? document.getElementById('form-phase').value.trim() : '',
+          model: document.getElementById('form-model') ? document.getElementById('form-model').value.trim() : '',
+          area: document.getElementById('form-area') ? Number(document.getElementById('form-area').value) : 0,
+          floor: document.getElementById('form-floor') ? document.getElementById('form-floor').value : '',
+          viewType: document.getElementById('form-view') ? document.getElementById('form-view').value : '',
+          finishing: document.getElementById('form-finishing') ? document.getElementById('form-finishing').value : '',
+          bedrooms: document.getElementById('form-bedrooms') ? Number(document.getElementById('form-bedrooms').value) : 0,
+          bathrooms: document.getElementById('form-bathrooms') ? Number(document.getElementById('form-bathrooms').value) : 0,
+          gardenArea: document.getElementById('form-garden-area') ? Number(document.getElementById('form-garden-area').value) : 0,
+
+          totalPrice: document.getElementById('form-total-price') ? Number(document.getElementById('form-total-price').value) : 0,
+          paidAmount: document.getElementById('form-paid') ? Number(document.getElementById('form-paid').value) : 0,
+          overPrice: document.getElementById('form-over') ? Number(document.getElementById('form-over').value) : 0,
+          remainingAmount: document.getElementById('form-remaining') ? Number(document.getElementById('form-remaining').value) : 0,
+          deposit: document.getElementById('form-deposit') ? Number(document.getElementById('form-deposit').value) : 0,
+          annualInstallment: document.getElementById('form-annual-inst') ? Number(document.getElementById('form-annual-inst').value) : 0,
+          monthlyInstallment: document.getElementById('form-monthly-inst') ? Number(document.getElementById('form-monthly-inst').value) : 0,
+
+          landmark: document.getElementById('form-landmark') ? document.getElementById('form-landmark').value.trim() : '',
+          locationLink: document.getElementById('form-location-link') ? document.getElementById('form-location-link').value.trim() : '',
+          propertyStatus: document.getElementById('form-status') ? document.getElementById('form-status').value : '',
+          deliveryDate: document.getElementById('form-delivery-date') ? document.getElementById('form-delivery-date').value : '',
+          description: document.getElementById('form-desc') ? document.getElementById('form-desc').value.trim() : '',
+        };
+
+        if (uploadedImages.length > 0) {
+          propData.images = uploadedImages;
+        }
+
+        if (this.editingPropertyId) {
+          if (uploadedImages.length === 0) {
+             const existing = await DataService.getPropertyById(this.editingPropertyId);
+             if (existing && existing.images) propData.images = existing.images;
+          }
+          await DataService.updateProperty(this.editingPropertyId, propData);
+          showToast('تم تحديث بيانات العقار بنجاح!', 'success');
+          this.editingPropertyId = null;
+        } else {
+          await DataService.addProperty(propData);
+          showToast('تمت إضافة العقار بنجاح!', 'success');
+        }
+
+        form.reset();
+        const lbl = document.getElementById('file-count-label');
+        if (lbl) lbl.textContent = 'اضغط هنا لاختيار صور من جهازك';
+        await this.refreshData();
+        this.switchTab('properties');
+      } catch (err) {
+        showToast(err.message || 'حدث خطأ أثناء الحفظ', 'error');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (spinner) spinner.classList.add('hidden');
       }
-
-      form.reset();
-      await this.refreshData();
-      this.switchTab('properties');
     });
   },
 
@@ -336,29 +365,44 @@ const AdminApp = {
     this.editingPropertyId = id;
     this.switchTab('add-property');
 
-    document.getElementById('form-prop-title').value = prop.title || '';
-    document.getElementById('form-prop-subtitle').value = prop.subtitle || '';
-    document.getElementById('form-prop-city').value = prop.city || 'مدينتي';
-    document.getElementById('form-prop-district').value = prop.district || '';
-    document.getElementById('form-prop-type').value = prop.type || 'شقة';
-    document.getElementById('form-prop-price').value = prop.price || '';
-    document.getElementById('form-prop-original-price').value = prop.originalPrice || '';
-    document.getElementById('form-prop-downpayment').value = prop.downPayment || '';
-    document.getElementById('form-prop-plan').value = prop.installmentPlan || '';
-    document.getElementById('form-prop-beds').value = prop.bedrooms || 3;
-    document.getElementById('form-prop-baths').value = prop.bathrooms || 2;
-    document.getElementById('form-prop-area').value = prop.area || 140;
-    document.getElementById('form-prop-floor').value = prop.floor || '';
-    document.getElementById('form-prop-finishing').value = prop.finishing || 'سوبر لوكس';
-    document.getElementById('form-prop-view').value = prop.viewType || '';
-    document.getElementById('form-prop-is-deal').checked = Boolean(prop.isDeal);
-    document.getElementById('form-prop-discount').value = prop.discountPercent || 0;
-    document.getElementById('form-prop-is-exclusive').checked = Boolean(prop.isExclusive);
-    document.getElementById('form-prop-is-new').checked = Boolean(prop.isNew);
-    document.getElementById('form-prop-images').value = (prop.images || []).join('\n');
-    document.getElementById('form-prop-desc').value = prop.description || '';
+    if (document.getElementById('form-purpose')) document.getElementById('form-purpose').value = prop.purpose || 'بيع - كاش';
+    if (document.getElementById('form-address')) document.getElementById('form-address').value = prop.address || prop.title || '';
+    if (document.getElementById('form-owner-name')) document.getElementById('form-owner-name').value = prop.ownerName || '';
+    if (document.getElementById('form-owner-phone1')) document.getElementById('form-owner-phone1').value = prop.ownerPhone1 || '';
+    if (document.getElementById('form-owner-phone2')) document.getElementById('form-owner-phone2').value = prop.ownerPhone2 || '';
 
-    document.getElementById('form-submit-btn').textContent = 'حفظ التعديلات';
+    if (document.getElementById('form-phase')) document.getElementById('form-phase').value = prop.phase || '';
+    if (document.getElementById('form-model')) document.getElementById('form-model').value = prop.model || '';
+    if (document.getElementById('form-area')) document.getElementById('form-area').value = prop.area || '';
+    if (document.getElementById('form-floor')) document.getElementById('form-floor').value = prop.floor || 'أرضي بحديقة';
+    if (document.getElementById('form-view')) document.getElementById('form-view').value = prop.viewType || 'جاردن';
+    if (document.getElementById('form-finishing')) document.getElementById('form-finishing').value = prop.finishing || 'سوبر لوكس';
+    if (document.getElementById('form-bedrooms')) document.getElementById('form-bedrooms').value = prop.bedrooms || '';
+    if (document.getElementById('form-bathrooms')) document.getElementById('form-bathrooms').value = prop.bathrooms || '';
+    if (document.getElementById('form-garden-area')) document.getElementById('form-garden-area').value = prop.gardenArea || '';
+
+    if (document.getElementById('form-total-price')) document.getElementById('form-total-price').value = prop.totalPrice || prop.price || '';
+    if (document.getElementById('form-paid')) document.getElementById('form-paid').value = prop.paidAmount || '';
+    if (document.getElementById('form-over')) document.getElementById('form-over').value = prop.overPrice || '';
+    if (document.getElementById('form-remaining')) document.getElementById('form-remaining').value = prop.remainingAmount || '';
+    if (document.getElementById('form-deposit')) document.getElementById('form-deposit').value = prop.deposit || '';
+    if (document.getElementById('form-annual-inst')) document.getElementById('form-annual-inst').value = prop.annualInstallment || '';
+    if (document.getElementById('form-monthly-inst')) document.getElementById('form-monthly-inst').value = prop.monthlyInstallment || '';
+
+    if (document.getElementById('form-landmark')) document.getElementById('form-landmark').value = prop.landmark || '';
+    if (document.getElementById('form-location-link')) document.getElementById('form-location-link').value = prop.locationLink || '';
+    if (document.getElementById('form-status')) document.getElementById('form-status').value = prop.propertyStatus || 'جاهز للاستلام';
+    if (document.getElementById('form-delivery-date')) document.getElementById('form-delivery-date').value = prop.deliveryDate || '';
+    if (document.getElementById('form-desc')) document.getElementById('form-desc').value = prop.description || '';
+    
+    const lbl = document.getElementById('file-count-label');
+    if (lbl) lbl.textContent = 'اختيار صور جديدة (سيتم استبدال القديمة إن وجدت)';
+    
+    const submitBtn = document.getElementById('form-submit-btn');
+    if (submitBtn) {
+      const span = submitBtn.querySelector('span:not(.material-symbols-outlined)');
+      if (span) span.textContent = 'حفظ التعديلات';
+    }
   },
 
   async deleteProperty(id) {

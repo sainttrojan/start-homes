@@ -101,6 +101,31 @@ const DataService = {
     return firebase.firestore();
   },
 
+  
+  get storage() {
+    return firebase.storage();
+  },
+
+  async uploadImages(files) {
+    if (!firebase.apps.length || !files || files.length === 0) return [];
+    
+    const uploadedUrls = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const filename = `properties/${Date.now()}_${Math.random().toString(36).substring(7)}_${file.name}`;
+      const storageRef = this.storage.ref(filename);
+      
+      try {
+        const snapshot = await storageRef.put(file);
+        const url = await snapshot.ref.getDownloadURL();
+        uploadedUrls.push(url);
+      } catch (e) {
+        console.error('Error uploading file:', e);
+      }
+    }
+    return uploadedUrls;
+  },
+
   async getProperties() {
     if (!firebase.apps.length) return [];
     try {
@@ -236,62 +261,79 @@ const DataService = {
     }
   },
 
+
   mapDbProperty(id, data) {
     return {
       id: id,
-      title: data.title,
-      subtitle: data.subtitle || '',
-      city: data.city,
-      district: data.district || data.city,
-      type: data.type || 'شقة',
-      price: Number(data.price) || 0,
-      originalPrice: Number(data.originalPrice) || Number(data.price),
-      downPayment: Number(data.downPayment) || 0,
-      installmentPlan: data.installmentPlan || 'كاش',
-      bedrooms: data.bedrooms || 3,
-      bathrooms: data.bathrooms || 2,
-      area: Number(data.area) || 140,
-      floor: data.floor || 'الدور الثاني',
-      finishing: data.finishing || 'سوبر لوكس',
-      elevator: Boolean(data.elevator),
-      viewType: data.viewType || 'إطلالة مفتوحة',
-      isDeal: Boolean(data.isDeal),
-      discountPercent: data.discountPercent || 0,
-      isExclusive: Boolean(data.isExclusive),
-      isNew: Boolean(data.isNew),
-      isReady: Boolean(data.isReady),
-      legalCheck: Boolean(data.legalCheck),
+      purpose: data.purpose || 'بيع',
+      address: data.address || '',
+      ownerName: data.ownerName || '',
+      ownerPhone1: data.ownerPhone1 || '',
+      ownerPhone2: data.ownerPhone2 || '',
+      
+      phase: data.phase || '',
+      model: data.model || '',
+      area: Number(data.area) || 0,
+      floor: data.floor || '',
+      viewType: data.viewType || '',
+      finishing: data.finishing || '',
+      bedrooms: Number(data.bedrooms) || 0,
+      bathrooms: Number(data.bathrooms) || 0,
+      gardenArea: Number(data.gardenArea) || 0,
+
+      totalPrice: Number(data.totalPrice) || 0,
+      paidAmount: Number(data.paidAmount) || 0,
+      overPrice: Number(data.overPrice) || 0,
+      remainingAmount: Number(data.remainingAmount) || 0,
+      deposit: Number(data.deposit) || 0,
+      annualInstallment: Number(data.annualInstallment) || 0,
+      monthlyInstallment: Number(data.monthlyInstallment) || 0,
+
+      landmark: data.landmark || '',
+      locationLink: data.locationLink || '',
+      propertyStatus: data.propertyStatus || 'جاهز للاستلام',
+      deliveryDate: data.deliveryDate || '',
+      description: data.description || '',
+
       images: sanitizeImagesList(data.images),
-      description: data.description || ''
+      createdAt: data.createdAt ? data.createdAt.toDate().toISOString() : new Date().toISOString()
     };
   },
 
+
   mapPropertyToDb(p) {
     return {
-      title: p.title,
-      subtitle: p.subtitle || '',
-      city: p.city,
-      district: p.district || '',
-      type: p.type || 'شقة',
-      price: Number(p.price) || 0,
-      originalPrice: Number(p.originalPrice) || Number(p.price),
-      downPayment: Number(p.downPayment) || 0,
-      installmentPlan: p.installmentPlan || 'كاش',
-      bedrooms: Number(p.bedrooms) || 3,
-      bathrooms: Number(p.bathrooms) || 2,
-      area: Number(p.area) || 140,
-      floor: p.floor || 'الدور الثاني',
-      finishing: p.finishing || 'سوبر لوكس',
-      elevator: Boolean(p.elevator),
-      viewType: p.viewType || 'إطلالة مفتوحة',
-      isDeal: Boolean(p.isDeal),
-      discountPercent: Number(p.discountPercent) || 0,
-      isExclusive: Boolean(p.isExclusive),
-      isNew: Boolean(p.isNew),
-      isReady: Boolean(p.isReady),
-      legalCheck: Boolean(p.legalCheck),
-      images: sanitizeImagesList(p.images),
-      description: p.description || ''
+      purpose: p.purpose || 'بيع',
+      address: p.address || '',
+      ownerName: p.ownerName || '',
+      ownerPhone1: p.ownerPhone1 || '',
+      ownerPhone2: p.ownerPhone2 || '',
+      
+      phase: p.phase || '',
+      model: p.model || '',
+      area: Number(p.area) || 0,
+      floor: p.floor || '',
+      viewType: p.viewType || '',
+      finishing: p.finishing || '',
+      bedrooms: Number(p.bedrooms) || 0,
+      bathrooms: Number(p.bathrooms) || 0,
+      gardenArea: Number(p.gardenArea) || 0,
+
+      totalPrice: Number(p.totalPrice) || 0,
+      paidAmount: Number(p.paidAmount) || 0,
+      overPrice: Number(p.overPrice) || 0,
+      remainingAmount: Number(p.remainingAmount) || 0,
+      deposit: Number(p.deposit) || 0,
+      annualInstallment: Number(p.annualInstallment) || 0,
+      monthlyInstallment: Number(p.monthlyInstallment) || 0,
+
+      landmark: p.landmark || '',
+      locationLink: p.locationLink || '',
+      propertyStatus: p.propertyStatus || 'جاهز للاستلام',
+      deliveryDate: p.deliveryDate || '',
+      description: p.description || '',
+
+      images: sanitizeImagesList(p.images)
     };
   }
 };

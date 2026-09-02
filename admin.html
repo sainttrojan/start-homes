@@ -13,6 +13,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -452,7 +453,18 @@ service cloud.firestore {
       allow read, update, delete: if request.auth != null;
     }
   }
-}</code></pre>
+}
+</script>
+<p class="text-xs text-secondary mt-4 mb-2 font-bold">قواعد حماية تخزين الصور Firebase Storage Rules:</p>
+<pre class="bg-[#1e1e1e] text-[#d4d4d4] p-4 rounded-xl text-[11px] font-mono overflow-x-auto text-left" dir="ltr"><code>rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}</code></pre></code></pre>
           </div>
         </div>
       </div>
