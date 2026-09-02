@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>اتصل بنا | Start Homes</title>
+  <meta name="description" content="تواصل مع فريق ستارت هومز للتسويق العقاري. مقرنا في مدينتي East Hub building 18 office f11 madinaty والخط الساخن 19xxx."/>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#735c00",
+            "primary-container": "#d4af37",
+            "on-primary-container": "#191c1d",
+            "on-primary-fixed": "#241a00",
+            "primary-fixed": "#ffe088",
+            "secondary": "#5f5e5e",
+            "surface": "#f8f9fa",
+            "surface-bright": "#f8f9fa",
+            "surface-container-low": "#f3f4f5",
+            "surface-container": "#edeeef",
+            "surface-container-high": "#e7e8e9",
+            "on-surface": "#191c1d",
+            "on-surface-variant": "#4d4635",
+            "pure-white": "#FFFFFF",
+            "border-gray": "#E5E7EB",
+            "badge-gold-bg": "#FFF8E7",
+            "badge-gold-text": "#996515",
+            "success-green": "#00C250",
+            "tertiary": "#32618f",
+            "inverse-surface": "#191c1d"
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "gutter": "24px",
+            "container-max": "1200px",
+            "margin-mobile": "16px",
+            "margin-desktop": "48px"
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col antialiased">
+
+  <!-- Top Navigation Header -->
+  <header class="glass-header sticky top-0 w-full z-50 border-b border-border-gray">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
+      
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="font-extrabold text-2xl tracking-tight text-on-surface flex items-center gap-2">
+          <span class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container font-black text-xl shadow-sm">S</span>
+          <span>Start Homes</span>
+        </a>
+
+        <nav class="hidden lg:flex gap-7 items-center">
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="index.html">الرئيسية</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="latest-units.html">أحدث الوحدات</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="resale-deals.html">لقطات ريسيل</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="sell-property.html">اعرض شقتك للبيع</a>
+          <a class="text-primary font-bold border-b-2 border-primary pb-1 text-sm transition-colors" href="contact.html">اتصل بنا</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
+        
+        <!-- Dark / Light Mode Toggle Button -->
+        <button class="theme-toggle-btn p-2 rounded-xl text-secondary hover:text-primary hover:bg-surface-container transition-all" title="تبديل المظهر (Dark / Light Mode)">
+          <span class="material-symbols-outlined theme-toggle-icon text-2xl">dark_mode</span>
+        </button>
+
+        <button class="open-favorites-modal relative p-2 text-secondary hover:text-primary transition-colors" title="الوحدات المحفوظة">
+          <span class="material-symbols-outlined text-2xl">favorite</span>
+          <span class="favorites-badge-count hidden absolute -top-1 -right-1 bg-primary-container text-on-primary-container text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+
+        <button onclick="openWhatsAppLead('مرحباً ستارت هومز، أود التواصل مع خدمة العملاء')" class="hidden sm:flex items-center gap-1.5 btn-primary px-4 py-2 rounded-lg text-xs font-bold">
+          <span class="material-symbols-outlined text-lg">chat</span>
+          <span>واتساب</span>
+        </button>
+
+        <a href="tel:19xxx" class="hidden md:flex items-center gap-1.5 text-on-surface font-bold text-sm bg-surface-container px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors">
+          <span class="material-symbols-outlined text-primary text-lg">call</span>
+          <span>19xxx</span>
+        </a>
+
+        <button class="mobile-menu-toggle lg:hidden p-2 text-on-surface hover:text-primary">
+          <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 flex-grow">
+    
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <div class="inline-flex items-center gap-1.5 bg-badge-gold-bg text-badge-gold-text px-4 py-1.5 rounded-full text-xs font-bold mb-3 shadow-sm">
+        <span class="material-symbols-outlined text-[14px]">headset_mic</span>
+        <span>خدمة العملاء على مدار الساعة</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-black text-on-surface mb-3">تواصل معنا - يسعدنا خدمتك دائماً</h1>
+      <p class="text-sm md:text-base text-secondary leading-relaxed">
+        فريق من كبار المستشارين العقاريين جاهز للإجابة على جميع استفساراتك وتنظيم المعاينات فوراً.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+      
+      <!-- Contact Form (7 cols) -->
+      <div class="lg:col-span-7 bg-pure-white rounded-3xl border border-border-gray p-6 sm:p-10 shadow-sm">
+        <h3 class="text-xl font-bold text-on-surface mb-6 border-b border-border-gray pb-4">أرسل لنا استفسارك</h3>
+        
+        <form id="contact-form" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-secondary mb-1.5">الاسم بالكامل *</label>
+            <input type="text" required placeholder="أدخل اسمك الكريم" class="input-field w-full p-3.5 rounded-xl text-xs"/>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1.5">رقم الهاتف / الواتساب *</label>
+              <input type="tel" required placeholder="01xxxxxxxxx" class="input-field w-full p-3.5 rounded-xl text-xs"/>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1.5">البريد الإلكتروني</label>
+              <input type="email" placeholder="example@domain.com" class="input-field w-full p-3.5 rounded-xl text-xs"/>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-secondary mb-1.5">نوع الاستفسار</label>
+            <select class="input-field w-full p-3.5 rounded-xl text-xs">
+              <option>شراء وحدة ريسيل (استلام فوري)</option>
+              <option>بيع وحدة سكنية أو فيلا</option>
+              <option>استفسار عن خطط السداد والتقسيط</option>
+              <option>استشارة عقارية عامة</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-secondary mb-1.5">رسالتك أو تفاصيل العقار المطلوب</label>
+            <textarea rows="4" placeholder="اكتب استفسارك بالتفصيل..." class="input-field w-full p-3.5 rounded-xl text-xs"></textarea>
+          </div>
+
+          <button type="submit" class="w-full btn-primary py-4 rounded-xl text-xs font-black shadow-md hover-gold-glow flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-lg">send</span>
+            <span>إرسال الرسالة الآن</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Info Cards (5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <!-- Channels Box -->
+        <div class="bg-pure-white rounded-3xl border border-border-gray p-6 sm:p-8 shadow-sm space-y-6">
+          <h3 class="text-lg font-bold text-on-surface border-b border-border-gray pb-3">قنوات الاتصال المباشرة</h3>
+          
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-2xl bg-badge-gold-bg text-primary flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-2xl">call</span>
+            </div>
+            <div>
+              <span class="block text-xs text-secondary mb-0.5">الخط الساخن</span>
+              <a href="tel:19xxx" class="text-lg font-black text-on-surface hover:text-primary">19xxx</a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-2xl bg-success-green/10 text-success-green flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-2xl">chat</span>
+            </div>
+            <div>
+              <span class="block text-xs text-secondary mb-0.5">واتساب المبيعات والدعم</span>
+              <a href="https://wa.me/201099887766" target="_blank" class="text-sm font-bold text-on-surface hover:text-primary">01099887766</a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-2xl bg-surface-container text-tertiary flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-2xl">mail</span>
+            </div>
+            <div>
+              <span class="block text-xs text-secondary mb-0.5">البريد الإلكتروني</span>
+              <a href="mailto:info@starthomes.com" class="text-sm font-bold text-on-surface hover:text-primary">info@starthomes.com</a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-2xl bg-surface-container text-secondary flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-2xl">schedule</span>
+            </div>
+            <div>
+              <span class="block text-xs text-secondary mb-0.5">ساعات العمل الرسمية</span>
+              <span class="text-xs font-bold text-on-surface">يومياً من 10:00 صباحاً حتى 10:00 مساءً</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Branch Location Box -->
+        <div class="bg-pure-white rounded-3xl border border-border-gray p-6 sm:p-8 shadow-sm space-y-4">
+          <h3 class="text-lg font-bold text-on-surface border-b border-border-gray pb-3 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">location_on</span>
+            <span>مقر وفرع الشركة</span>
+          </h3>
+          
+          <div class="p-4 bg-surface-container-low rounded-2xl border border-border-gray">
+            <div class="font-black text-sm text-primary mb-1">East Hub building 18 office f11 madinaty</div>
+            <p class="text-xs text-on-surface font-semibold">إيست هب - مبنى 18 - مكتب F11 - مدينتي - القاهرة</p>
+            <p class="text-xs text-secondary mt-2">جاهزون لاستقبالكم للمعاينات وتوقيع العقود والاستشارات العقارية.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="bg-inverse-surface text-surface-container py-16 border-t border-secondary/40">
+    <div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-center text-xs text-secondary">
+      <p class="text-surface-variant mb-2"><strong>East Hub building 18 office f11 madinaty</strong></p>
+      جميع الحقوق محفوظة لشركة ستارت هومز © 2024 - 2026
+    </div>
+  </footer>
+
+  <!-- Mobile Drawer -->
+  <div id="drawer-backdrop" class="fixed inset-0 modal-backdrop z-50 hidden transition-opacity"></div>
+  <div id="mobile-drawer" class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-pure-white z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+    <div class="p-6 border-b border-border-gray flex justify-between items-center">
+      <div class="font-extrabold text-xl text-on-surface">Start Homes</div>
+      <button id="drawer-close" class="p-1.5 text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-2xl">close</span></button>
+    </div>
+    <div class="p-6 flex-1 overflow-y-auto space-y-4">
+      <div class="flex items-center justify-between py-2 border-b border-border-gray">
+        <span class="text-xs font-bold text-on-surface">المظهر (Dark / Light)</span>
+        <button class="theme-toggle-btn p-2 rounded-lg text-secondary hover:text-primary bg-surface-container">
+          <span class="material-symbols-outlined theme-toggle-icon text-xl">dark_mode</span>
+        </button>
+      </div>
+      <a href="index.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">الرئيسية</a>
+      <a href="latest-units.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">أحدث الوحدات</a>
+      <a href="resale-deals.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">لقطات ريسيل</a>
+      <a href="sell-property.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">اعرض شقتك للبيع</a>
+      <a href="contact.html" class="block font-bold text-primary py-2 border-b border-border-gray">اتصل بنا</a>
+    </div>
+  </div>
+
+  <!-- Favorites Modal -->
+  <div id="favorites-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div id="favorites-modal-backdrop" class="fixed inset-0 modal-backdrop"></div>
+    <div class="relative z-10 bg-pure-white rounded-2xl max-w-xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-border-gray overflow-hidden">
+      <div class="p-5 border-b border-border-gray flex justify-between items-center bg-surface-bright">
+        <div class="flex items-center gap-2 font-bold text-on-surface text-base">
+          <span class="material-symbols-outlined text-primary">favorite</span>
+          <span>الوحدات المحفوظة في المفضلة</span>
+        </div>
+        <button id="favorites-modal-close" class="p-1 text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-2xl">close</span></button>
+      </div>
+      <div id="favorites-modal-list" class="p-5 overflow-y-auto space-y-3 flex-1"></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/data.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('شكراً لتواصلك معنا! تم استلام رسالتك وسيتصل بك أحد ممثلينا في أقرب وقت.', 'success');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>لوحة التحكم وقاعدة البيانات | Start Homes Admin</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  
+  <!-- Supabase JS Client SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#735c00",
+            "primary-container": "#d4af37",
+            "on-primary-container": "#191c1d",
+            "secondary": "#5f5e5e",
+            "surface": "#f8f9fa",
+            "surface-bright": "#f8f9fa",
+            "surface-container-low": "#f3f4f5",
+            "surface-container": "#edeeef",
+            "surface-container-high": "#e7e8e9",
+            "on-surface": "#191c1d",
+            "on-surface-variant": "#4d4635",
+            "pure-white": "#FFFFFF",
+            "border-gray": "#E5E7EB",
+            "badge-gold-bg": "#FFF8E7",
+            "badge-gold-text": "#996515",
+            "success-green": "#00C250",
+            "tertiary": "#32618f",
+            "inverse-surface": "#191c1d"
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col antialiased">
+
+  <!-- Top Admin Bar -->
+  <header class="glass-header sticky top-0 w-full z-40 border-b border-border-gray">
+    <div class="flex justify-between items-center px-4 sm:px-8 h-16 max-w-7xl mx-auto">
+      
+      <div class="flex items-center gap-4">
+        <a href="admin.html" class="font-extrabold text-xl text-on-surface flex items-center gap-2">
+          <span class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-black text-base shadow-sm">S</span>
+          <span>Start Homes <span class="text-xs bg-primary-container/20 text-primary-container px-2 py-0.5 rounded font-bold">Admin</span></span>
+        </a>
+        <div id="supabase-status-badge" class="hidden sm:flex items-center gap-1.5 text-xs bg-surface-container px-3 py-1.5 rounded-full border border-border-gray">
+          <!-- Injected by js/admin.js -->
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Admin Profile -->
+        <div id="admin-user-profile" class="hidden items-center gap-2 bg-surface-container px-3 py-1.5 rounded-xl border border-border-gray text-xs font-semibold text-on-surface">
+          <span class="material-symbols-outlined text-primary text-base">shield_person</span>
+          <span id="admin-user-email">admin@starthomes.com</span>
+          <button id="admin-logout-btn" class="text-red-500 hover:text-red-700 mr-2 font-bold flex items-center gap-0.5" title="تسجيل الخروج">
+            <span class="material-symbols-outlined text-sm">logout</span>
+            <span>خروج</span>
+          </button>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="theme-toggle-btn p-2 rounded-xl text-secondary hover:text-primary hover:bg-surface-container transition-all" title="تبديل المظهر">
+          <span class="material-symbols-outlined theme-toggle-icon text-xl">dark_mode</span>
+        </button>
+
+        <!-- View Live Site -->
+        <a href="index.html" target="_blank" class="btn-secondary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-base">open_in_new</span>
+          <span>الموقع المباشر</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Admin Login Modal Gate -->
+  <div id="admin-login-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-inverse-surface/85 backdrop-blur-md hidden">
+    <div class="bg-pure-white rounded-3xl border border-border-gray max-w-md w-full p-8 shadow-2xl">
+      <div class="text-center mb-6">
+        <span class="w-14 h-14 rounded-2xl bg-primary-container text-on-primary-container flex items-center justify-center font-black text-2xl shadow-md mx-auto mb-3">S</span>
+        <h2 class="text-xl font-black text-on-surface">تسجيل دخول لوحة الإدارة</h2>
+        <p class="text-xs text-secondary mt-1">Start Homes Secure Admin Panel</p>
+      </div>
+      <form id="admin-login-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">البريد الإلكتروني للوحة الإدارة</label>
+          <input id="login-email" type="email" required placeholder="admin@starthomes.com" autocomplete="username" class="input-field w-full p-3 rounded-xl text-xs font-medium"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">كلمة المرور</label>
+          <input id="login-password" type="password" required placeholder="••••••••" autocomplete="current-password" class="input-field w-full p-3 rounded-xl text-xs font-medium"/>
+        </div>
+        <button type="submit" id="login-submit-btn" class="w-full btn-primary py-3.5 rounded-xl text-xs font-bold shadow-md hover-gold-glow flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-base">lock_open</span>
+          <span>دخول لوحة التحكم</span>
+        </button>
+      </form>
+      <div class="mt-5 p-3.5 rounded-2xl bg-surface-container text-[11px] text-secondary leading-relaxed border border-border-gray">
+        🔒 <strong>حماية وتشفير:</strong> لوحة التحكم مؤمنة بنظام الرموز الموثقة (JWT) وصلاحيات Supabase RLS لحظر أي وصول غير مصرح به.
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Main Layout -->
+  <div class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-8 flex flex-col lg:flex-row gap-8">
+    
+    <!-- Sidebar Navigation (280px) -->
+    <aside class="w-full lg:w-64 shrink-0">
+      <div class="bg-pure-white rounded-2xl border border-border-gray p-4 shadow-sm sticky top-24 space-y-1.5">
+        <a href="#" data-tab="properties" class="admin-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold bg-primary-container text-on-primary-container transition-all">
+          <span class="material-symbols-outlined text-lg">apartment</span>
+          <span>إدارة العقارات</span>
+        </a>
+
+        <a href="#" data-tab="add-property" class="admin-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold text-secondary hover:bg-surface-container transition-all">
+          <span class="material-symbols-outlined text-lg">add_circle</span>
+          <span>إضافة عقار جديد</span>
+        </a>
+
+        <a href="#" data-tab="inquiries" class="admin-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold text-secondary hover:bg-surface-container transition-all">
+          <span class="material-symbols-outlined text-lg">calendar_month</span>
+          <span>طلبات المعاينة</span>
+        </a>
+
+        <a href="#" data-tab="sellers" class="admin-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold text-secondary hover:bg-surface-container transition-all">
+          <span class="material-symbols-outlined text-lg">real_estate_agent</span>
+          <span>عروض الملاك للبيع</span>
+        </a>
+
+        <a href="#" data-tab="settings" class="admin-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold text-secondary hover:bg-surface-container transition-all border-t border-border-gray pt-3 mt-3">
+          <span class="material-symbols-outlined text-lg">cloud_sync</span>
+          <span>إعدادات Supabase</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 min-w-0">
+      
+      <!-- Stats Overview Bar -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+        <div class="bg-pure-white p-5 rounded-2xl border border-border-gray shadow-sm">
+          <span class="block text-xs text-secondary mb-1">إجمالي العقارات</span>
+          <div id="stat-total-props" class="text-2xl sm:text-3xl font-black text-on-surface">0</div>
+        </div>
+        <div class="bg-pure-white p-5 rounded-2xl border border-border-gray shadow-sm">
+          <span class="block text-xs text-secondary mb-1">لقطات الريسيل 🔥</span>
+          <div id="stat-deals" class="text-2xl sm:text-3xl font-black text-primary">0</div>
+        </div>
+        <div class="bg-pure-white p-5 rounded-2xl border border-border-gray shadow-sm">
+          <span class="block text-xs text-secondary mb-1">طلبات المعاينة</span>
+          <div id="stat-inquiries" class="text-2xl sm:text-3xl font-black text-success-green">0</div>
+        </div>
+        <div class="bg-pure-white p-5 rounded-2xl border border-border-gray shadow-sm">
+          <span class="block text-xs text-secondary mb-1">عروض الملاك</span>
+          <div id="stat-sellers" class="text-2xl sm:text-3xl font-black text-tertiary">0</div>
+        </div>
+      </div>
+
+      <!-- PANEL 1: Properties List -->
+      <div id="panel-properties" class="admin-panel space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-pure-white p-5 rounded-2xl border border-border-gray shadow-sm">
+          <div>
+            <h2 class="font-bold text-lg text-on-surface">العقارات والوحدات المتاحة</h2>
+            <p class="text-xs text-secondary mt-0.5">يمكنك إضافة أو تعديل أو حذف أي وحدة معروضة في الموقع.</p>
+          </div>
+          <button onclick="AdminApp.switchTab('add-property')" class="btn-primary px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-base">add</span>
+            <span>إضافة عقار جديد</span>
+          </button>
+        </div>
+
+        <div class="bg-pure-white rounded-2xl border border-border-gray overflow-hidden shadow-sm">
+          <div class="overflow-x-auto">
+            <table class="w-full text-right border-collapse">
+              <thead>
+                <tr class="bg-surface-container-low border-b border-border-gray text-xs font-bold text-secondary">
+                  <th class="p-4">العقار</th>
+                  <th class="p-4">النوع</th>
+                  <th class="p-4">السعر</th>
+                  <th class="p-4">المواصفات</th>
+                  <th class="p-4">الحالة</th>
+                  <th class="p-4">الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="props-table-body">
+                <!-- Injected by js/admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: Add / Edit Property Form -->
+      <div id="panel-add-property" class="admin-panel hidden bg-pure-white rounded-3xl border border-border-gray p-6 sm:p-8 shadow-sm">
+        <div class="border-b border-border-gray pb-4 mb-6">
+          <h2 class="font-bold text-xl text-on-surface">إضافة / تعديل بيانات العقار</h2>
+          <p class="text-xs text-secondary mt-1">أدخل بيانات الوحدة بدقة لتظهر فوراً في صفحات الموقع وقاعدة بيانات Supabase.</p>
+        </div>
+
+        <form id="property-form" class="space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-bold text-secondary mb-1">عنوان العقار الرئيسي *</label>
+              <input id="form-prop-title" type="text" required placeholder="مثال: شقة 140م² فيو جاردن - مدينتي B11" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-bold text-secondary mb-1">العنوان الفرعي / الوصف المختصر</label>
+              <input id="form-prop-subtitle" type="text" placeholder="مثال: المرحلة الحادية عشر - تشطيب سوبر لوكس" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">المدينة / المنطقة *</label>
+              <select id="form-prop-city" class="input-field w-full p-3 rounded-xl text-xs">
+                <option value="مدينتي">مدينتي</option>
+                <option value="الرحاب">الرحاب</option>
+                <option value="التجمع الخامس">التجمع الخامس</option>
+                <option value="الشيخ زايد">الشيخ زايد</option>
+                <option value="العاصمة الإدارية">العاصمة الإدارية</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">المرحلة أو الحي أو الكمبوند *</label>
+              <input id="form-prop-district" type="text" required placeholder="مثال: B11، المرحلة 9، ماونتن فيو" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">نوع الوحدة *</label>
+              <select id="form-prop-type" class="input-field w-full p-3 rounded-xl text-xs">
+                <option value="شقة">شقة</option>
+                <option value="فيلا">فيلا مستقلة</option>
+                <option value="تاون هاوس">تاون هاوس</option>
+                <option value="دوبلكس">دوبلكس</option>
+                <option value="بنتهاوس">بنتهاوس</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">السعر الإجمالي المطلوب (ج.م) *</label>
+              <input id="form-prop-price" type="number" required placeholder="4500000" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">السعر قبل الخصم (للقطات الريسيل)</label>
+              <input id="form-prop-original-price" type="number" placeholder="4800000" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">المقدم المطلوب نقداً (ج.م)</label>
+              <input id="form-prop-downpayment" type="number" placeholder="2000000" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-bold text-secondary mb-1">نظام السداد والأقساط</label>
+              <input id="form-prop-plan" type="text" placeholder="مثال: أقساط حتى 2027، أو كاش خالص الثمن" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">غرف النوم</label>
+              <input id="form-prop-beds" type="number" value="3" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">الحمامات</label>
+              <input id="form-prop-baths" type="number" value="2" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">المساحة (م²)</label>
+              <input id="form-prop-area" type="number" value="140" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">الدور / الطابق</label>
+              <input id="form-prop-floor" type="text" placeholder="الدور الثاني" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">نوع التشطيب</label>
+              <select id="form-prop-finishing" class="input-field w-full p-3 rounded-xl text-xs">
+                <option value="سوبر لوكس">سوبر لوكس</option>
+                <option value="ألترا سوبر لوكس">ألترا سوبر لوكس</option>
+                <option value="نصف تشطيب">نصف تشطيب</option>
+                <option value="تشطيب طلعت مصطفى">تشطيب طلعت مصطفى</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-secondary mb-1">نوع الإطلالة والفيو</label>
+              <input id="form-prop-view" type="text" placeholder="وايد جاردن بحري صريح" class="input-field w-full p-3 rounded-xl text-xs"/>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-bold text-secondary mb-1">روابط الصور (رابط كل صورة في سطر منفصل)</label>
+              <textarea id="form-prop-images" rows="3" placeholder="https://image-link-1.jpg&#10;https://image-link-2.jpg" class="input-field w-full p-3 rounded-xl text-xs font-mono"></textarea>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-bold text-secondary mb-1">الوصف التفصيلي للعقار</label>
+              <textarea id="form-prop-desc" rows="4" placeholder="اكتب تفاصيل العقار ومميزاته وموقعه..." class="input-field w-full p-3 rounded-xl text-xs"></textarea>
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="sm:col-span-2 flex flex-wrap gap-6 pt-2 border-t border-border-gray">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input id="form-prop-is-deal" type="checkbox" class="accent-primary rounded"/>
+                <span class="text-xs font-bold text-on-surface">تمييز كـ "لقطة ريسيل 🔥"</span>
+              </label>
+
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input id="form-prop-is-exclusive" type="checkbox" checked class="accent-primary rounded"/>
+                <span class="text-xs font-bold text-on-surface">وحدة حصرية</span>
+              </label>
+
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input id="form-prop-is-new" type="checkbox" checked class="accent-primary rounded"/>
+                <span class="text-xs font-bold text-on-surface">إضافة جديدة</span>
+              </label>
+
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-secondary">نسبة الخصم (%):</span>
+                <input id="form-prop-discount" type="number" value="0" class="input-field w-20 p-1.5 text-xs text-center rounded-lg"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-4 pt-4 border-t border-border-gray">
+            <button id="form-submit-btn" type="submit" class="btn-primary px-8 py-3.5 rounded-xl text-xs font-bold shadow-md hover-gold-glow">
+              حفظ ونشر العقار
+            </button>
+            <button type="button" onclick="AdminApp.switchTab('properties')" class="btn-secondary px-6 py-3.5 rounded-xl text-xs font-bold">
+              إلغاء
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- PANEL 3: Viewing Inquiries -->
+      <div id="panel-inquiries" class="admin-panel hidden space-y-4">
+        <div class="bg-pure-white p-5 rounded-2xl border border-border-gray shadow-sm">
+          <h2 class="font-bold text-lg text-on-surface">طلبات حجز المعاينات الواردة</h2>
+          <p class="text-xs text-secondary mt-0.5">العملاء الذين طلبوا معاينة عقار محدد من الموقع.</p>
+        </div>
+
+        <div class="bg-pure-white rounded-2xl border border-border-gray overflow-hidden shadow-sm">
+          <div class="overflow-x-auto">
+            <table class="w-full text-right border-collapse">
+              <thead>
+                <tr class="bg-surface-container-low border-b border-border-gray text-xs font-bold text-secondary">
+                  <th class="p-4">اسم العميل</th>
+                  <th class="p-4">رقم الهاتف</th>
+                  <th class="p-4">الوحدة المطلوبة</th>
+                  <th class="p-4">الموعد المقترح</th>
+                  <th class="p-4">الإجراء</th>
+                </tr>
+              </thead>
+              <tbody id="inquiries-table-body">
+                <!-- Injected by js/admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 4: Seller Listing Submissions -->
+      <div id="panel-sellers" class="admin-panel hidden space-y-4">
+        <div class="bg-pure-white p-5 rounded-2xl border border-border-gray shadow-sm">
+          <h2 class="font-bold text-lg text-on-surface">عروض الملاك (اعرض شقتك للبيع)</h2>
+          <p class="text-xs text-secondary mt-0.5">عقارات أرسلها أصحابها عبر صفحة "اعرض شقتك للبيع" مع إمكانية نشرها مباشرة في الموقع.</p>
+        </div>
+
+        <div class="bg-pure-white rounded-2xl border border-border-gray overflow-hidden shadow-sm">
+          <div class="overflow-x-auto">
+            <table class="w-full text-right border-collapse">
+              <thead>
+                <tr class="bg-surface-container-low border-b border-border-gray text-xs font-bold text-secondary">
+                  <th class="p-4">المالك</th>
+                  <th class="p-4">الموقع</th>
+                  <th class="p-4">الوحدة</th>
+                  <th class="p-4">السعر المطلوب</th>
+                  <th class="p-4">ملاحظات</th>
+                  <th class="p-4">الإجراء</th>
+                </tr>
+              </thead>
+              <tbody id="sellers-table-body">
+                <!-- Injected by js/admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 5: Supabase Connection Settings -->
+      <div id="panel-settings" class="admin-panel hidden bg-pure-white rounded-3xl border border-border-gray p-6 sm:p-8 shadow-sm space-y-8">
+        <div>
+          <h2 class="font-bold text-xl text-on-surface flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">cloud_sync</span>
+            <span>إعدادات الربط مع قاعدة بيانات Supabase</span>
+          </h2>
+          <p class="text-xs text-secondary mt-1">اربط مشروعك على Supabase ليتم حفظ كل العقارات والصور والطلبات سحابياً بشكل دائم.</p>
+        </div>
+
+        <div class="space-y-4 bg-surface-container-low p-5 rounded-2xl border border-border-gray">
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Supabase Project URL</label>
+            <input id="supabase-url-input" type="text" value="https://idvlfmdeaqpiopljctma.supabase.co" placeholder="https://idvlfmdeaqpiopljctma.supabase.co" class="input-field w-full p-3 rounded-xl text-xs font-mono"/>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Supabase Anon Key (API Public Key)</label>
+            <input id="supabase-key-input" type="text" value="sb_publishable_4OsuumW8Y44rw43Mbi8iYA_eTBYvAFN" placeholder="sb_publishable_..." class="input-field w-full p-3 rounded-xl text-xs font-mono"/>
+          </div>
+
+          <button id="supabase-save-btn" class="btn-primary px-6 py-3 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span class="material-symbols-outlined text-base">check</span>
+            <span>حفظ واختبار الاتصال</span>
+          </button>
+        </div>
+
+        <!-- SQL Schema 1-Click Copy -->
+        <div class="border-t border-border-gray pt-6">
+          <div class="flex justify-between items-center mb-3">
+            <div>
+              <h3 class="font-bold text-sm text-on-surface">كود SQL لإنشاء الجداول في Supabase</h3>
+              <p class="text-xs text-secondary">انسخ هذا الكود وضعه في الـ SQL Editor داخل حسابك على Supabase واضغط Run.</p>
+            </div>
+            <button id="copy-sql-btn" class="btn-secondary px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1">
+              <span class="material-symbols-outlined text-base">content_copy</span>
+              <span>نسخ كود SQL</span>
+            </button>
+          </div>
+          <pre class="bg-inverse-surface text-surface-container p-4 rounded-xl text-[11px] font-mono overflow-x-auto max-h-72"><code>-- Start Homes - Production Security & Row Level Security (RLS)
+alter table public.properties enable row level security;
+alter table public.inquiries enable row level security;
+alter table public.seller_requests enable row level security;
+
+-- 1. Properties Policies
+create policy "Anyone can view properties" on public.properties for select using (true);
+create policy "Admins can insert properties" on public.properties for insert to authenticated with check (true);
+create policy "Admins can update properties" on public.properties for update to authenticated using (true) with check (true);
+create policy "Admins can delete properties" on public.properties for delete to authenticated using (true);
+
+-- 2. Inquiries Policies
+create policy "Public can submit viewing inquiries" on public.inquiries for insert with check (true);
+create policy "Only Admins can read inquiries" on public.inquiries for select to authenticated using (true);
+create policy "Only Admins can update inquiries" on public.inquiries for update to authenticated using (true);
+
+-- 3. Seller Requests Policies
+create policy "Public can submit property to sell" on public.seller_requests for insert with check (true);
+create policy "Only Admins can read seller requests" on public.seller_requests for select to authenticated using (true);
+create policy "Only Admins can update seller requests" on public.seller_requests for update to authenticated using (true);</code></pre>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

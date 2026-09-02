@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>تفاصيل العقار | Start Homes</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#735c00",
+            "primary-container": "#d4af37",
+            "on-primary-container": "#191c1d",
+            "on-primary-fixed": "#241a00",
+            "primary-fixed": "#ffe088",
+            "secondary": "#5f5e5e",
+            "surface": "#f8f9fa",
+            "surface-bright": "#f8f9fa",
+            "surface-container-low": "#f3f4f5",
+            "surface-container": "#edeeef",
+            "surface-container-high": "#e7e8e9",
+            "on-surface": "#191c1d",
+            "on-surface-variant": "#4d4635",
+            "pure-white": "#FFFFFF",
+            "border-gray": "#E5E7EB",
+            "badge-gold-bg": "#FFF8E7",
+            "badge-gold-text": "#996515",
+            "success-green": "#00C250",
+            "tertiary": "#32618f",
+            "inverse-surface": "#191c1d"
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "gutter": "24px",
+            "container-max": "1200px",
+            "margin-mobile": "16px",
+            "margin-desktop": "48px"
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col antialiased">
+
+  <!-- Top Navigation Header -->
+  <header class="glass-header sticky top-0 w-full z-50 border-b border-border-gray">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
+      
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="font-extrabold text-2xl tracking-tight text-on-surface flex items-center gap-2">
+          <span class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container font-black text-xl shadow-sm">S</span>
+          <span>Start Homes</span>
+        </a>
+
+        <nav class="hidden lg:flex gap-7 items-center">
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="index.html">الرئيسية</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="latest-units.html">أحدث الوحدات</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="resale-deals.html">لقطات ريسيل</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="sell-property.html">اعرض شقتك للبيع</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="contact.html">اتصل بنا</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
+        
+        <!-- Dark / Light Mode Toggle Button -->
+        <button class="theme-toggle-btn p-2 rounded-xl text-secondary hover:text-primary hover:bg-surface-container transition-all" title="تبديل المظهر (Dark / Light Mode)">
+          <span class="material-symbols-outlined theme-toggle-icon text-2xl">dark_mode</span>
+        </button>
+
+        <button class="open-favorites-modal relative p-2 text-secondary hover:text-primary transition-colors" title="الوحدات المحفوظة">
+          <span class="material-symbols-outlined text-2xl">favorite</span>
+          <span class="favorites-badge-count hidden absolute -top-1 -right-1 bg-primary-container text-on-primary-container text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+
+        <button onclick="openWhatsAppLead()" class="hidden sm:flex items-center gap-1.5 btn-primary px-4 py-2 rounded-lg text-xs font-bold">
+          <span class="material-symbols-outlined text-lg">chat</span>
+          <span>واتساب</span>
+        </button>
+
+        <a href="tel:19xxx" class="hidden md:flex items-center gap-1.5 text-on-surface font-bold text-sm bg-surface-container px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors">
+          <span class="material-symbols-outlined text-primary text-lg">call</span>
+          <span>19xxx</span>
+        </a>
+
+        <button class="mobile-menu-toggle lg:hidden p-2 text-on-surface hover:text-primary">
+          <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto py-8 flex-grow">
+    
+    <!-- Breadcrumbs -->
+    <nav class="text-xs mb-6 text-secondary flex items-center gap-2">
+      <a class="hover:text-primary transition-colors font-medium" href="index.html">الرئيسية</a>
+      <span>/</span>
+      <a class="hover:text-primary transition-colors font-medium" href="latest-units.html" id="bc-city">أحدث الوحدات</a>
+      <span>/</span>
+      <span class="text-on-surface font-bold line-clamp-1" id="bc-title">تفاصيل العقار</span>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
+      
+      <!-- Left Side: Gallery & Details (8 Cols) -->
+      <div class="lg:col-span-8 flex flex-col gap-8">
+        
+        <!-- Gallery Container -->
+        <div class="flex flex-col gap-4">
+          <!-- Main Image -->
+          <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-border-gray bg-surface-container-high cursor-pointer" onclick="PropertyDetailsApp.openLightbox()">
+            <img id="gallery-main-img" alt="Property Image" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src=""/>
+            <div class="absolute top-4 right-4 flex gap-2">
+              <span class="bg-badge-gold-bg text-badge-gold-text px-3 py-1 rounded-full text-xs font-bold shadow-sm">استلام فوري</span>
+              <span class="bg-badge-gold-bg text-badge-gold-text px-3 py-1 rounded-full text-xs font-bold shadow-sm">معاينة متاحة</span>
+            </div>
+            <button id="prop-fav-btn" class="fav-btn absolute top-4 left-4 w-10 h-10 rounded-full bg-pure-white/80 hover:bg-pure-white backdrop-blur-md flex items-center justify-center text-on-surface transition-all shadow-md" title="حفظ في المفضلة">
+              <span class="material-symbols-outlined text-xl">favorite</span>
+            </button>
+            <div class="absolute bottom-4 left-4 bg-inverse-surface/75 text-pure-white px-3 py-1.5 rounded-lg text-xs backdrop-blur-md flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-base">zoom_in</span>
+              <span>اضغط للتكبير وعرض الصور</span>
+            </div>
+          </div>
+
+          <!-- Thumbnails Row -->
+          <div id="gallery-thumbnails" class="grid grid-cols-4 gap-3">
+            <!-- Injected by js/property-details.js -->
+          </div>
+        </div>
+
+        <!-- Property Specs Card -->
+        <section class="bg-pure-white rounded-2xl border border-border-gray p-6 sm:p-8 shadow-sm">
+          <h3 class="text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">analytics</span>
+            <span>مواصفات العقار الأساسية</span>
+          </h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-bright border border-border-gray/70">
+              <span class="material-symbols-outlined text-primary text-2xl">bed</span>
+              <div>
+                <span class="block text-[11px] text-secondary">غرف النوم</span>
+                <span class="font-bold text-sm text-on-surface" id="spec-beds">3 غرف نوم</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-bright border border-border-gray/70">
+              <span class="material-symbols-outlined text-primary text-2xl">shower</span>
+              <div>
+                <span class="block text-[11px] text-secondary">الحمامات</span>
+                <span class="font-bold text-sm text-on-surface" id="spec-baths">2 حمام</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-bright border border-border-gray/70">
+              <span class="material-symbols-outlined text-primary text-2xl">square_foot</span>
+              <div>
+                <span class="block text-[11px] text-secondary">المساحة الكلية</span>
+                <span class="font-bold text-sm text-on-surface" id="spec-area">140 م²</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-bright border border-border-gray/70">
+              <span class="material-symbols-outlined text-primary text-2xl">layers</span>
+              <div>
+                <span class="block text-[11px] text-secondary">الدور / الطابق</span>
+                <span class="font-bold text-sm text-on-surface" id="spec-floor">الدور الثاني</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-bright border border-border-gray/70">
+              <span class="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
+              <div>
+                <span class="block text-[11px] text-secondary">نوع التشطيب</span>
+                <span class="font-bold text-sm text-on-surface" id="spec-finishing">تشطيب سوبر لوكس</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-bright border border-border-gray/70">
+              <span class="material-symbols-outlined text-primary text-2xl">elevator</span>
+              <div>
+                <span class="block text-[11px] text-secondary">المصعد</span>
+                <span class="font-bold text-sm text-on-surface" id="spec-elevator">يوجد مصعد</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-bright border border-border-gray/70 sm:col-span-2">
+              <span class="material-symbols-outlined text-primary text-2xl">visibility</span>
+              <div>
+                <span class="block text-[11px] text-secondary">نوع الإطلالة</span>
+                <span class="font-bold text-sm text-on-surface" id="spec-view">وايد جاردن مفتوح</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Description & Amenities -->
+        <section class="bg-pure-white rounded-2xl border border-border-gray p-6 sm:p-8 shadow-sm">
+          <h3 class="text-xl font-bold text-on-surface mb-4">وصف تفصيلي للوحدة</h3>
+          <p id="prop-description" class="text-sm text-on-surface-variant leading-relaxed mb-8 whitespace-pre-line"></p>
+
+          <h4 class="text-base font-bold text-on-surface mb-4">مزايا وخدمات إضافية</h4>
+          <ul id="prop-amenities" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <!-- Injected by js/property-details.js -->
+          </ul>
+        </section>
+
+      </div>
+
+      <!-- Right Side: Sticky Lead Card (4 Cols) -->
+      <div class="lg:col-span-4">
+        <div class="sticky top-28 bg-pure-white rounded-2xl border border-border-gray p-6 sm:p-7 shadow-lg flex flex-col gap-6">
+          
+          <div>
+            <div class="inline-flex items-center gap-1.5 bg-success-green/10 text-success-green px-3 py-1 rounded-full text-xs font-bold mb-3">
+              <span class="material-symbols-outlined text-[14px]">verified</span>
+              <span>فحص قانوني معتمد</span>
+            </div>
+            <h1 id="prop-title" class="text-xl sm:text-2xl font-bold text-on-surface mb-1 leading-snug"></h1>
+            <p id="prop-subtitle" class="text-xs text-secondary mb-4"></p>
+            
+            <div class="bg-surface-container-low p-4 rounded-xl border border-border-gray/70 mb-4">
+              <div class="text-xs text-secondary mb-1">السعر الإجمالي المطلوب:</div>
+              <div id="prop-price" class="text-2xl sm:text-3xl font-black text-primary mb-3"></div>
+              
+              <div class="flex justify-between items-center text-xs text-secondary border-t border-border-gray/70 pt-2.5">
+                <span>المقدم:</span>
+                <strong id="prop-downpayment" class="text-on-surface"></strong>
+              </div>
+              <div class="flex justify-between items-center text-xs text-secondary mt-1.5">
+                <span>نظام السداد:</span>
+                <strong id="prop-plan" class="text-primary-container"></strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advisor Actions -->
+          <div class="flex flex-col gap-3">
+            <button class="prop-wa-lead-btn w-full btn-primary py-3.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 hover-gold-glow">
+              <span class="material-symbols-outlined text-lg">chat</span>
+              <span>تواصل فوراً عبر الواتساب</span>
+            </button>
+
+            <button class="prop-schedule-view-btn w-full btn-secondary py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-lg">calendar_month</span>
+              <span>طلب تحديد موعد معاينة</span>
+            </button>
+
+            <button class="prop-call-btn w-full bg-surface-bright hover:bg-surface-container border border-border-gray text-on-surface py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-colors">
+              <span class="material-symbols-outlined text-primary text-lg">call</span>
+              <span>اتصل بالمستشار (19xxx)</span>
+            </button>
+          </div>
+
+          <div class="text-[11px] text-secondary text-center leading-relaxed border-t border-border-gray pt-4">
+            🔒 لا توجد أي رسوم أو عمولات خفية. نحن نضمن لك سلامة أوراق الملكية والمخالصات المالية.
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Similar Listings Section -->
+    <section class="mt-20 border-t border-border-gray pt-12">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold text-on-surface">وحدات مشابهة قد تهمك</h2>
+        <a href="latest-units.html" class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+          <span>عرض المزيد</span>
+          <span class="material-symbols-outlined text-sm">arrow_back</span>
+        </a>
+      </div>
+      <div id="similar-listings-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Injected by js/property-details.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Fullscreen Lightbox Modal -->
+  <div id="gallery-lightbox" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-inverse-surface/95 backdrop-blur-lg">
+    <button onclick="PropertyDetailsApp.closeLightbox()" class="absolute top-6 right-6 text-pure-white hover:text-primary-container p-2">
+      <span class="material-symbols-outlined text-3xl">close</span>
+    </button>
+    <div class="relative max-w-5xl w-full max-h-[85vh] flex flex-col items-center justify-center">
+      <img id="lightbox-img" class="max-h-[75vh] w-auto object-contain rounded-xl shadow-2xl border border-pure-white/10" src=""/>
+      <div class="flex items-center gap-6 mt-4 text-pure-white font-bold text-sm">
+        <button onclick="PropertyDetailsApp.lightboxPrev()" class="p-2 hover:text-primary-container flex items-center gap-1">
+          <span class="material-symbols-outlined">chevron_right</span>
+          <span>السابقة</span>
+        </button>
+        <span id="lightbox-counter">1 / 5</span>
+        <button onclick="PropertyDetailsApp.lightboxNext()" class="p-2 hover:text-primary-container flex items-center gap-1">
+          <span>التالية</span>
+          <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Footer -->
+  <footer class="bg-inverse-surface text-surface-container py-16 border-t border-secondary/40">
+    <div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-center text-xs text-secondary">
+      <p class="text-surface-variant mb-2"><strong>East Hub building 18 office f11 madinaty</strong></p>
+      جميع الحقوق محفوظة لشركة ستارت هومز © 2024 - 2026
+    </div>
+  </footer>
+
+  <!-- Schedule Viewing Modal -->
+  <div id="viewing-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div class="fixed inset-0 modal-backdrop" onclick="closeViewingModal()"></div>
+    <div class="relative z-10 bg-pure-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-border-gray">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-bold text-lg text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">calendar_month</span>
+          <span>طلب تحديد موعد معاينة</span>
+        </h3>
+        <button onclick="closeViewingModal()" class="text-secondary hover:text-on-surface">
+          <span class="material-symbols-outlined text-2xl">close</span>
+        </button>
+      </div>
+      <form id="viewing-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">الوحدة المطلوبة</label>
+          <input id="viewing-property-title" type="text" class="input-field w-full p-3 rounded-lg text-sm bg-surface-container font-semibold" readonly/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">الاسم بالكامل</label>
+          <input type="text" required placeholder="أدخل اسمك الكريم" class="input-field w-full p-3 rounded-lg text-sm"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">رقم الهاتف / الواتساب</label>
+          <input type="tel" required placeholder="01xxxxxxxxx" class="input-field w-full p-3 rounded-lg text-sm"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">الموعد المقترح للمعاينة</label>
+          <input type="date" class="input-field w-full p-3 rounded-lg text-sm"/>
+        </div>
+        <button type="submit" class="w-full btn-primary py-3.5 rounded-xl text-sm font-bold mt-2">تأكيد إرسال الطلب</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Favorites Modal -->
+  <div id="favorites-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div id="favorites-modal-backdrop" class="fixed inset-0 modal-backdrop"></div>
+    <div class="relative z-10 bg-pure-white rounded-2xl max-w-xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-border-gray overflow-hidden">
+      <div class="p-5 border-b border-border-gray flex justify-between items-center bg-surface-bright">
+        <div class="flex items-center gap-2 font-bold text-on-surface text-base">
+          <span class="material-symbols-outlined text-primary">favorite</span>
+          <span>الوحدات المحفوظة في المفضلة</span>
+        </div>
+        <button id="favorites-modal-close" class="p-1 text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-2xl">close</span></button>
+      </div>
+      <div id="favorites-modal-list" class="p-5 overflow-y-auto space-y-3 flex-1"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div id="drawer-backdrop" class="fixed inset-0 modal-backdrop z-50 hidden transition-opacity"></div>
+  <div id="mobile-drawer" class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-pure-white z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+    <div class="p-6 border-b border-border-gray flex justify-between items-center">
+      <div class="font-extrabold text-xl text-on-surface">Start Homes</div>
+      <button id="drawer-close" class="p-1.5 text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-2xl">close</span></button>
+    </div>
+    <div class="p-6 flex-1 overflow-y-auto space-y-4">
+      <div class="flex items-center justify-between py-2 border-b border-border-gray">
+        <span class="text-xs font-bold text-on-surface">المظهر (Dark / Light)</span>
+        <button class="theme-toggle-btn p-2 rounded-lg text-secondary hover:text-primary bg-surface-container">
+          <span class="material-symbols-outlined theme-toggle-icon text-xl">dark_mode</span>
+        </button>
+      </div>
+      <a href="index.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">الرئيسية</a>
+      <a href="latest-units.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">أحدث الوحدات</a>
+      <a href="resale-deals.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">لقطات ريسيل</a>
+      <a href="sell-property.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">اعرض شقتك للبيع</a>
+      <a href="contact.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">اتصل بنا</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/data.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/property-details.js"></script>
+</body>
+</html>

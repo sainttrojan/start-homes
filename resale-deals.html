@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>لقطات الريسيل - صفقات لا تعوض | Start Homes</title>
+  <meta name="description" content="وحدات ريسيل مختارة بعناية بأسعار أقل من سعر السوق لسرعة البيع وفحص قانوني معتمد."/>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#735c00",
+            "primary-container": "#d4af37",
+            "on-primary-container": "#191c1d",
+            "on-primary-fixed": "#241a00",
+            "primary-fixed": "#ffe088",
+            "secondary": "#5f5e5e",
+            "surface": "#f8f9fa",
+            "surface-bright": "#f8f9fa",
+            "surface-container-low": "#f3f4f5",
+            "surface-container": "#edeeef",
+            "surface-container-high": "#e7e8e9",
+            "on-surface": "#191c1d",
+            "on-surface-variant": "#4d4635",
+            "pure-white": "#FFFFFF",
+            "border-gray": "#E5E7EB",
+            "badge-gold-bg": "#FFF8E7",
+            "badge-gold-text": "#996515",
+            "success-green": "#00C250",
+            "tertiary": "#32618f",
+            "inverse-surface": "#191c1d"
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "gutter": "24px",
+            "container-max": "1200px",
+            "margin-mobile": "16px",
+            "margin-desktop": "48px"
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col antialiased">
+
+  <!-- Top Navigation Header -->
+  <header class="glass-header sticky top-0 w-full z-50 border-b border-border-gray">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
+      
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="font-extrabold text-2xl tracking-tight text-on-surface flex items-center gap-2">
+          <span class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container font-black text-xl shadow-sm">S</span>
+          <span>Start Homes</span>
+        </a>
+
+        <nav class="hidden lg:flex gap-7 items-center">
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="index.html">الرئيسية</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="latest-units.html">أحدث الوحدات</a>
+          <a class="text-primary font-bold border-b-2 border-primary pb-1 text-sm transition-colors" href="resale-deals.html">لقطات ريسيل</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="sell-property.html">اعرض شقتك للبيع</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="contact.html">اتصل بنا</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
+        
+        <!-- Dark / Light Mode Toggle Button -->
+        <button class="theme-toggle-btn p-2 rounded-xl text-secondary hover:text-primary hover:bg-surface-container transition-all" title="تبديل المظهر (Dark / Light Mode)">
+          <span class="material-symbols-outlined theme-toggle-icon text-2xl">dark_mode</span>
+        </button>
+
+        <button class="open-favorites-modal relative p-2 text-secondary hover:text-primary transition-colors" title="الوحدات المحفوظة">
+          <span class="material-symbols-outlined text-2xl">favorite</span>
+          <span class="favorites-badge-count hidden absolute -top-1 -right-1 bg-primary-container text-on-primary-container text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+
+        <button onclick="openWhatsAppLead('استفسار عن لقطات الريسيل والعروض المخفضة')" class="hidden sm:flex items-center gap-1.5 btn-primary px-4 py-2 rounded-lg text-xs font-bold">
+          <span class="material-symbols-outlined text-lg">chat</span>
+          <span>واتساب</span>
+        </button>
+
+        <a href="tel:19xxx" class="hidden md:flex items-center gap-1.5 text-on-surface font-bold text-sm bg-surface-container px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors">
+          <span class="material-symbols-outlined text-primary text-lg">call</span>
+          <span>19xxx</span>
+        </a>
+
+        <button class="mobile-menu-toggle lg:hidden p-2 text-on-surface hover:text-primary">
+          <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-12 pb-24 flex-grow">
+    
+    <header class="text-center mb-10">
+      <div class="inline-flex items-center gap-1.5 bg-badge-gold-bg text-badge-gold-text px-4 py-1.5 rounded-full text-xs font-bold mb-3 shadow-sm">
+        <span class="material-symbols-outlined text-[14px]">local_fire_department</span>
+        <span>صفقات حصرية لسرعة البيع</span>
+      </div>
+      <h1 class="text-3xl md:text-5xl font-black text-on-surface mb-4">لقطات الريسيل - صفقات لا تعوض</h1>
+      <p class="text-base text-secondary max-w-2xl mx-auto leading-relaxed">وحدات مختارة بعناية بأسعار أقل من سعر السوق للتنفيذ الفوري مع أمان قانوني كامل.</p>
+    </header>
+
+    <!-- Trust Banner -->
+    <div class="bg-pure-white border border-border-gray rounded-2xl p-5 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-success-green/10 flex items-center justify-center text-success-green shrink-0">
+          <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-on-surface">Legal Check Completed</h4>
+          <p class="text-xs text-secondary">جميع الصفقات معتمدة قانونياً وجاهزة للتسجيل والتسليم الفوري.</p>
+        </div>
+      </div>
+      <button onclick="document.getElementById('deals-alert-modal').classList.remove('hidden')" class="btn-secondary px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shrink-0">
+        <span class="material-symbols-outlined text-primary text-base">notifications_active</span>
+        <span>تفعيل تنبيهات اللقطات</span>
+      </button>
+    </div>
+
+    <!-- City Filter Tabs -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
+      <button data-city="الكل" class="deal-tab-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all bg-primary-container text-on-primary-container shadow-sm shrink-0">كل الصفقات</button>
+      <button data-city="التجمع الخامس" class="deal-tab-btn px-5 py-2.5 rounded-xl text-xs font-semibold transition-all bg-pure-white text-secondary border border-border-gray hover:border-primary-container shrink-0">التجمع الخامس</button>
+      <button data-city="مدينتي" class="deal-tab-btn px-5 py-2.5 rounded-xl text-xs font-semibold transition-all bg-pure-white text-secondary border border-border-gray hover:border-primary-container shrink-0">مدينتي</button>
+      <button data-city="الرحاب" class="deal-tab-btn px-5 py-2.5 rounded-xl text-xs font-semibold transition-all bg-pure-white text-secondary border border-border-gray hover:border-primary-container shrink-0">الرحاب</button>
+      <button data-city="الشيخ زايد" class="deal-tab-btn px-5 py-2.5 rounded-xl text-xs font-semibold transition-all bg-pure-white text-secondary border border-border-gray hover:border-primary-container shrink-0">الشيخ زايد</button>
+      <button data-city="العاصمة الإدارية" class="deal-tab-btn px-5 py-2.5 rounded-xl text-xs font-semibold transition-all bg-pure-white text-secondary border border-border-gray hover:border-primary-container shrink-0">العاصمة الإدارية</button>
+    </div>
+
+    <!-- Deals Grid -->
+    <div id="deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Injected by js/resale.js -->
+    </div>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="bg-inverse-surface text-surface-container py-16 border-t border-secondary/40">
+    <div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-secondary/30">
+        <div>
+          <div class="font-black text-2xl text-primary-fixed mb-4">Start Homes</div>
+          <p class="text-xs text-surface-variant leading-relaxed">
+            ستارت هومز - الصفقات الحصرية والريسيل الموثق في مصر.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-pure-white mb-4">روابط سريعة</h4>
+          <ul class="space-y-2.5 text-xs text-surface-variant">
+            <li><a href="latest-units.html" class="hover:text-primary-fixed">أحدث الوحدات</a></li>
+            <li><a href="resale-deals.html" class="text-primary-fixed font-bold">لقطات ريسيل</a></li>
+            <li><a href="sell-property.html" class="hover:text-primary-fixed">اعرض شقتك للبيع</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-pure-white mb-4">المناطق</h4>
+          <ul class="space-y-2.5 text-xs text-surface-variant">
+            <li><a href="latest-units.html?city=مدينتي" class="hover:text-primary-fixed">مدينتي</a></li>
+            <li><a href="latest-units.html?city=الرحاب" class="hover:text-primary-fixed">الرحاب</a></li>
+            <li><a href="latest-units.html?city=التجمع+الخامس" class="hover:text-primary-fixed">التجمع الخامس</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-pure-white mb-4">عنوان الفرع والتواصل</h4>
+          <p class="text-xs text-surface-variant"><strong>East Hub building 18 office f11 madinaty</strong></p>
+          <p class="text-xs text-surface-variant mt-1">الخط الساخن: 19xxx | واتساب: 01099887766</p>
+        </div>
+      </div>
+      <div class="pt-8 text-center text-xs text-secondary">
+        جميع الحقوق محفوظة لشركة ستارت هومز © 2024 - 2026
+      </div>
+    </div>
+  </footer>
+
+  <!-- Deal Alerts Modal -->
+  <div id="deals-alert-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div class="fixed inset-0 modal-backdrop" onclick="document.getElementById('deals-alert-modal').classList.add('hidden')"></div>
+    <div class="relative z-10 bg-pure-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-border-gray">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-bold text-lg text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">notifications_active</span>
+          <span>تنبيهات لقطات الريسيل الفورية</span>
+        </h3>
+        <button onclick="document.getElementById('deals-alert-modal').classList.add('hidden')" class="text-secondary hover:text-on-surface">
+          <span class="material-symbols-outlined text-2xl">close</span>
+        </button>
+      </div>
+      <p class="text-xs text-secondary mb-4 leading-relaxed">
+        اللقطات الحقيقية تباع خلال ساعات! سجل رقمك لتصلك رسالة واتساب فور توفر أي وحدة بأقل من سعر السوق في منطقتك المفضلة.
+      </p>
+      <form id="deals-alert-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">الاسم</label>
+          <input type="text" required placeholder="اسمك الكريم" class="input-field w-full p-3 rounded-lg text-sm"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">رقم الواتساب</label>
+          <input type="tel" required placeholder="01xxxxxxxxx" class="input-field w-full p-3 rounded-lg text-sm"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-secondary mb-1">المنطقة المفضلة</label>
+          <select class="input-field w-full p-3 rounded-lg text-sm">
+            <option>مدينتي</option>
+            <option>الرحاب</option>
+            <option>التجمع الخامس</option>
+            <option>الشيخ زايد</option>
+            <option>العاصمة الإدارية</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full btn-primary py-3.5 rounded-xl text-sm font-bold">تفعيل التنبيهات مجاناً</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div id="drawer-backdrop" class="fixed inset-0 modal-backdrop z-50 hidden transition-opacity"></div>
+  <div id="mobile-drawer" class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-pure-white z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+    <div class="p-6 border-b border-border-gray flex justify-between items-center">
+      <div class="font-extrabold text-xl text-on-surface">Start Homes</div>
+      <button id="drawer-close" class="p-1.5 text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-2xl">close</span></button>
+    </div>
+    <div class="p-6 flex-1 overflow-y-auto space-y-4">
+      <div class="flex items-center justify-between py-2 border-b border-border-gray">
+        <span class="text-xs font-bold text-on-surface">المظهر (Dark / Light)</span>
+        <button class="theme-toggle-btn p-2 rounded-lg text-secondary hover:text-primary bg-surface-container">
+          <span class="material-symbols-outlined theme-toggle-icon text-xl">dark_mode</span>
+        </button>
+      </div>
+      <a href="index.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">الرئيسية</a>
+      <a href="latest-units.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">أحدث الوحدات</a>
+      <a href="resale-deals.html" class="block font-bold text-primary py-2 border-b border-border-gray">لقطات ريسيل</a>
+      <a href="sell-property.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">اعرض شقتك للبيع</a>
+      <a href="contact.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">اتصل بنا</a>
+    </div>
+  </div>
+
+  <!-- Favorites Modal -->
+  <div id="favorites-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div id="favorites-modal-backdrop" class="fixed inset-0 modal-backdrop"></div>
+    <div class="relative z-10 bg-pure-white rounded-2xl max-w-xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-border-gray overflow-hidden">
+      <div class="p-5 border-b border-border-gray flex justify-between items-center bg-surface-bright">
+        <div class="flex items-center gap-2 font-bold text-on-surface text-base">
+          <span class="material-symbols-outlined text-primary">favorite</span>
+          <span>الوحدات المحفوظة في المفضلة</span>
+        </div>
+        <button id="favorites-modal-close" class="p-1 text-secondary hover:text-on-surface"><span class="material-symbols-outlined text-2xl">close</span></button>
+      </div>
+      <div id="favorites-modal-list" class="p-5 overflow-y-auto space-y-3 flex-1"></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/data.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/resale.js"></script>
+</body>
+</html>

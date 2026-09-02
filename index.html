@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Start Homes | دور، قارن، واشتري وحدتك ريسيل في مدينتي والرحاب</title>
+  <meta name="description" content="ستارت هومز - المنصة الرائدة لعقارات الريسيل في مدينتي، الرحاب، التجمع الخامس، والشيخ زايد بأفضل أسعار الكاش والتقسيط."/>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#735c00",
+            "primary-container": "#d4af37",
+            "on-primary-container": "#191c1d",
+            "on-primary-fixed": "#241a00",
+            "primary-fixed": "#ffe088",
+            "secondary": "#5f5e5e",
+            "surface": "#f8f9fa",
+            "surface-bright": "#f8f9fa",
+            "surface-container-low": "#f3f4f5",
+            "surface-container": "#edeeef",
+            "surface-container-high": "#e7e8e9",
+            "on-surface": "#191c1d",
+            "on-surface-variant": "#4d4635",
+            "pure-white": "#FFFFFF",
+            "border-gray": "#E5E7EB",
+            "badge-gold-bg": "#FFF8E7",
+            "badge-gold-text": "#996515",
+            "success-green": "#00C250",
+            "tertiary": "#32618f",
+            "inverse-surface": "#191c1d"
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "gutter": "24px",
+            "container-max": "1200px",
+            "margin-mobile": "16px",
+            "margin-desktop": "48px"
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col antialiased">
+
+  <!-- Top Navigation Header -->
+  <header class="glass-header sticky top-0 w-full z-50 border-b border-border-gray">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="font-extrabold text-2xl tracking-tight text-on-surface flex items-center gap-2">
+          <span class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container font-black text-xl shadow-sm">S</span>
+          <span>Start Homes</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="hidden lg:flex gap-7 items-center">
+          <a class="text-primary font-bold border-b-2 border-primary pb-1 text-sm transition-colors" href="index.html">الرئيسية</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="latest-units.html">أحدث الوحدات</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="resale-deals.html">لقطات ريسيل</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="sell-property.html">اعرض شقتك للبيع</a>
+          <a class="text-secondary hover:text-primary text-sm font-semibold transition-colors" href="contact.html">اتصل بنا</a>
+        </nav>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
+        
+        <!-- Dark / Light Mode Toggle Button -->
+        <button class="theme-toggle-btn p-2 rounded-xl text-secondary hover:text-primary hover:bg-surface-container transition-all" title="تبديل المظهر (Dark / Light Mode)">
+          <span class="material-symbols-outlined theme-toggle-icon text-2xl">dark_mode</span>
+        </button>
+
+        <!-- Favorites Trigger -->
+        <button class="open-favorites-modal relative p-2 text-secondary hover:text-primary transition-colors" title="الوحدات المحفوظة">
+          <span class="material-symbols-outlined text-2xl">favorite</span>
+          <span class="favorites-badge-count hidden absolute -top-1 -right-1 bg-primary-container text-on-primary-container text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+
+        <!-- WhatsApp Quick Chat -->
+        <button onclick="openWhatsAppLead('مرحباً ستارت هومز، أود الاستفسار عن الوحدات المتاحة للبيع والشراء')" class="hidden sm:flex items-center gap-1.5 btn-primary px-4 py-2 rounded-lg text-xs font-bold" title="محادثة واتساب">
+          <span class="material-symbols-outlined text-lg">chat</span>
+          <span>واتساب</span>
+        </button>
+
+        <!-- Hotline -->
+        <a href="tel:19xxx" class="hidden md:flex items-center gap-1.5 text-on-surface font-bold text-sm bg-surface-container px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors">
+          <span class="material-symbols-outlined text-primary text-lg">call</span>
+          <span>19xxx</span>
+        </a>
+
+        <!-- Mobile Menu Hamburger -->
+        <button class="mobile-menu-toggle lg:hidden p-2 text-on-surface hover:text-primary">
+          <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow">
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[580px] lg:h-[620px] flex items-center justify-center">
+      <div class="absolute inset-0 z-0 overflow-hidden">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjnyR7yjjOct0JO1cMCnDXVn75agYtE1TqLdAHR-JpA7d91CWgapQ2ZVNErAX8HRc80CHKjxBaRiZTPcvhRkELlJpVrrVa7OA1UOmezjSwI4kFfsPZLs-pmvHNZ3fR9bE9_dvgbz8HDkrPAovfzgsGdO80Utrv0J84OLW8ABUhfw5h4kZrX7W2aQQRTto-gJ3o7p-1NT8WHRUJeMTDejhvOd10Nlwmzi7coQlIxxr3T-bR1hWDLNAw" alt="Start Homes Luxury Real Estate" class="w-full h-full object-cover object-center transform scale-105 filter brightness-90"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/60 to-inverse-surface/40"></div>
+      </div>
+
+      <div class="relative z-10 text-center px-4 md:px-6 max-w-4xl mx-auto pt-6 pb-20">
+        <div class="inline-flex items-center gap-2 bg-pure-white/15 backdrop-blur-md text-primary-fixed px-4 py-1.5 rounded-full text-xs font-bold mb-6 border border-pure-white/20">
+          <span class="material-symbols-outlined text-base text-primary-container">verified</span>
+          <span>المنصة رقم #1 لعقارات الريسيل في مدينتي والرحاب والتجمع</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-pure-white leading-tight mb-6">
+          دور، قارن، واشتري وحدتك ريسيل في مدينتي والرحاب بأحسن سعر كاش أو تقسيط
+        </h1>
+        <p class="text-base sm:text-lg text-surface-container font-medium max-w-2xl mx-auto mb-4 leading-relaxed">
+          أكبر مخزون وحدات ريسيل استلام فوري ومعاينات حقيقية على الطبيعة مع فحص قانوني معتمد 100%.
+        </p>
+      </div>
+    </section>
+
+    <!-- Floating Search & Filter Card -->
+    <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop -mt-24 relative z-20 mb-16">
+      <div class="bg-pure-white rounded-2xl shadow-xl border border-border-gray p-6 sm:p-8">
+        
+        <!-- Search Mode Tabs -->
+        <div class="flex gap-4 mb-6 border-b border-border-gray pb-4">
+          <button id="tab-buy-mode" class="font-bold text-sm text-primary border-b-2 border-primary pb-2 px-6 flex items-center gap-2">
+            <span class="material-symbols-outlined text-lg">home</span>
+            <span>شراء عقار</span>
+          </button>
+          <a href="sell-property.html" class="font-bold text-sm text-secondary hover:text-primary transition-colors pb-2 px-6 flex items-center gap-2">
+            <span class="material-symbols-outlined text-lg">sell</span>
+            <span>اعرض شقتك للبيع</span>
+          </a>
+        </div>
+
+        <!-- Filter Controls Form -->
+        <form onsubmit="handleHeroSearch(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-secondary mb-2">المنطقة والمدينة</label>
+            <select id="hero-city" class="input-field w-full rounded-xl p-3.5 text-sm outline-none transition-colors">
+              <option value="الكل">كل المناطق</option>
+              <option value="مدينتي">مدينتي</option>
+              <option value="الرحاب">الرحاب</option>
+              <option value="التجمع الخامس">التجمع الخامس</option>
+              <option value="الشيخ زايد">الشيخ زايد</option>
+              <option value="العاصمة الإدارية">العاصمة الإدارية</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-secondary mb-2">نوع الوحدة</label>
+            <select id="hero-type" class="input-field w-full rounded-xl p-3.5 text-sm outline-none transition-colors">
+              <option value="الكل">كل أنواع الوحدات</option>
+              <option value="شقة">شقة سكنية</option>
+              <option value="فيلا">فيلا مستقلة</option>
+              <option value="تاون هاوس">تاون هاوس</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-secondary mb-2">غرف النوم</label>
+            <select id="hero-beds" class="input-field w-full rounded-xl p-3.5 text-sm outline-none transition-colors">
+              <option value="الكل">الكل</option>
+              <option value="1">غرفة واحدة (1)</option>
+              <option value="2">غرفتين (2)</option>
+              <option value="3">3 غرف نوم</option>
+              <option value="4+">4 غرف أو أكثر</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-secondary mb-2">الحد الأقصى للسعر</label>
+            <select id="hero-price" class="input-field w-full rounded-xl p-3.5 text-sm outline-none transition-colors">
+              <option value="أي سعر">أي ميزانية</option>
+              <option value="4000000">حتى 4,000,000 ج.م</option>
+              <option value="6000000">حتى 6,000,000 ج.م</option>
+              <option value="10000000">حتى 10,000,000 ج.م</option>
+              <option value="25000000">أكثر من 10,000,000 ج.م</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-2 lg:col-span-4 mt-4 flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-border-gray">
+            <div class="flex items-center gap-6 text-xs text-secondary">
+              <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-success-green text-base">verified</span> فحص قانوني معتمد</span>
+              <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base">bolt</span> استلام فوري</span>
+              <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-tertiary text-base">payments</span> كاش أو تقسيط</span>
+            </div>
+            <button type="submit" class="btn-primary w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover-gold-glow">
+              <span class="material-symbols-outlined text-xl">search</span>
+              <span>بحث عن عقارات</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Trust & Stats Bar -->
+    <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-20">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bg-pure-white p-8 rounded-2xl border border-border-gray text-center">
+        <div>
+          <div class="text-3xl md:text-4xl font-black text-primary mb-1">+1,500</div>
+          <div class="text-xs md:text-sm font-bold text-on-surface">وحدة ريسيل موثقة</div>
+          <p class="text-[11px] text-secondary mt-1">جاهزة للمعاينة الفورية</p>
+        </div>
+        <div>
+          <div class="text-3xl md:text-4xl font-black text-primary mb-1">100%</div>
+          <div class="text-xs md:text-sm font-bold text-on-surface">فحص قانوني للعقود</div>
+          <p class="text-[11px] text-secondary mt-1">أمان كامل بدون مفاجآت</p>
+        </div>
+        <div>
+          <div class="text-3xl md:text-4xl font-black text-primary mb-1">+3,200</div>
+          <div class="text-xs md:text-sm font-bold text-on-surface">عميل يثق بنا</div>
+          <p class="text-[11px] text-secondary mt-1">في القاهرة الجديدة وزايد</p>
+        </div>
+        <div>
+          <div class="text-3xl md:text-4xl font-black text-primary mb-1">24/7</div>
+          <div class="text-xs md:text-sm font-bold text-on-surface">دعم ومستشار مخصص</div>
+          <p class="text-[11px] text-secondary mt-1">مرافقة من المعاينة للتسجيل</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Resale Hot Deals Section -->
+    <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-20">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+        <div>
+          <div class="inline-flex items-center gap-1.5 bg-badge-gold-bg text-badge-gold-text px-3 py-1 rounded-full text-xs font-bold mb-2">
+            <span class="material-symbols-outlined text-[14px]">local_fire_department</span>
+            <span>صفقات ريسيل لا تعوض</span>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-black text-on-surface">لقطات ريسيل بأسعار أقل من السوق</h2>
+          <p class="text-sm text-secondary mt-1">وحدات لسرعة البيع بخصومات حقيقية وفحص قانوني كامل.</p>
+        </div>
+        <a href="resale-deals.html" class="btn-secondary px-6 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1">
+          <span>عرض كل اللقطات</span>
+          <span class="material-symbols-outlined text-base">arrow_back</span>
+        </a>
+      </div>
+
+      <!-- Deals Grid (Rendered dynamically from Supabase / DataService) -->
+      <div id="home-deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="col-span-full py-12 text-center text-secondary text-sm">جاري تحميل الصفقات...</div>
+      </div>
+    </section>
+
+    <!-- Latest Units Showcase -->
+    <section class="bg-surface-bright py-20 border-y border-border-gray">
+      <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-10">
+          <div>
+            <div class="inline-flex items-center gap-1.5 bg-badge-gold-bg text-badge-gold-text px-3 py-1 rounded-full text-xs font-bold mb-2">
+              <span class="material-symbols-outlined text-[14px]">fiber_new</span>
+              <span>أحدث الإضافات</span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-black text-on-surface">أحدث الوحدات في مدينتي والرحاب</h2>
+            <p class="text-sm text-secondary mt-1">اكتشف شقق وفيلات معروضة للبيع بأفضل خطط السداد.</p>
+          </div>
+          <a href="latest-units.html" class="btn-primary px-6 py-2.5 rounded-lg text-xs font-bold flex items-center gap-1 hover-gold-glow">
+            <span>تصفح كل الوحدات المتاحة</span>
+            <span class="material-symbols-outlined text-base">arrow_back</span>
+          </a>
+        </div>
+
+        <!-- Latest Units Grid (Rendered dynamically from Supabase / DataService) -->
+        <div id="home-latest-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="col-span-full py-12 text-center text-secondary text-sm">جاري تحميل أحدث الوحدات...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Start Homes -->
+    <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-20">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-2xl md:text-3xl font-black text-on-surface mb-3">لماذا يختار العملاء Start Homes؟</h2>
+        <p class="text-sm text-secondary">نحن لا نبيع عقارات فقط، بل نضمن لك صفقة آمنة، بسعر عادل، وبدون أي مخاطر قانونية.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-pure-white p-8 rounded-2xl border border-border-gray text-center hover-gold-glow">
+          <div class="w-14 h-14 bg-badge-gold-bg text-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+            <span class="material-symbols-outlined text-3xl">verified_user</span>
+          </div>
+          <h3 class="text-lg font-bold text-on-surface mb-3">فحص وتدقيق قانوني 100%</h3>
+          <p class="text-xs text-secondary leading-relaxed">فريق قانوني متخصص يقوم بمراجعة كافة مستندات الملكية ومخالصات طلعت مصطفى أو المطور قبل التوقيع.</p>
+        </div>
+
+        <div class="bg-pure-white p-8 rounded-2xl border border-border-gray text-center hover-gold-glow">
+          <div class="w-14 h-14 bg-badge-gold-bg text-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+            <span class="material-symbols-outlined text-3xl">real_estate_agent</span>
+          </div>
+          <h3 class="text-lg font-bold text-on-surface mb-3">معاينات حقيقية على الطبيعة</h3>
+          <p class="text-xs text-secondary leading-relaxed">جميع الصور والبيانات مطابقة للواقع تماماً مع إمكانية تنظيم زيارة ومعاينة ميدانية في نفس اليوم.</p>
+        </div>
+
+        <div class="bg-pure-white p-8 rounded-2xl border border-border-gray text-center hover-gold-glow">
+          <div class="w-14 h-14 bg-badge-gold-bg text-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+            <span class="material-symbols-outlined text-3xl">currency_exchange</span>
+          </div>
+          <h3 class="text-lg font-bold text-on-surface mb-3">أفضل خطط سداد وتفاوض</h3>
+          <p class="text-xs text-secondary leading-relaxed">نساعدك في الحصول على أفضل سعر تفاوضي وتسهيلات دفع مرنة تناسب ميزانيتك الاستثمارية.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sell Property CTA Banner -->
+    <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-20">
+      <div class="bg-gradient-to-r from-inverse-surface via-on-surface to-inverse-surface rounded-3xl p-8 sm:p-12 text-pure-white flex flex-col lg:flex-row items-center justify-between gap-8 border border-primary-container/30 shadow-2xl relative overflow-hidden">
+        <div class="relative z-10 max-w-xl text-center lg:text-right">
+          <span class="bg-primary-container text-on-primary-container font-bold text-xs px-3 py-1 rounded-full inline-block mb-4">خدمة الملاك الحصرية</span>
+          <h2 class="text-2xl sm:text-3xl font-black mb-3 leading-tight">عايز تبيع شقتك أو فيلتك في مدينتي أو الرحاب بأعلى سعر؟</h2>
+          <p class="text-surface-container-high text-sm leading-relaxed">
+            اعرض وحدتك معنا الآن وسنوصلك بآلاف المشترين الجادين ونوفر لك فحصاً وتثميناً عقارياً مجانياً.
+          </p>
+        </div>
+        <div class="relative z-10 flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+          <a href="sell-property.html" class="btn-primary px-8 py-4 rounded-xl text-sm font-bold text-center hover-gold-glow">
+            اعرض شقتك للبيع الآن
+          </a>
+          <button onclick="openWhatsAppLead('استفسار من مالك عقار يرغب في بيع وحدته')" class="btn-secondary border-pure-white text-pure-white hover:bg-pure-white hover:text-on-surface px-6 py-4 rounded-xl text-sm font-bold text-center">
+            تحدث مع مسؤول المبيعات
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="bg-inverse-surface text-surface-container py-16 border-t border-secondary/40">
+    <div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-secondary/30">
+        
+        <!-- Col 1: About -->
+        <div class="md:col-span-1">
+          <div class="font-black text-2xl text-primary-fixed mb-4 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center text-lg">S</span>
+            <span>Start Homes</span>
+          </div>
+          <p class="text-xs text-surface-variant leading-relaxed mb-6">
+            ستارت هومز - وجهتك الأولى لشراء وبيع عقارات الريسيل في مدينتي، الرحاب، التجمع الخامس، والشيخ زايد بأمان وسرعة.
+          </p>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div>
+          <h4 class="text-sm font-bold text-pure-white mb-4">روابط سريعة</h4>
+          <ul class="space-y-2.5 text-xs text-surface-variant">
+            <li><a href="latest-units.html" class="hover:text-primary-fixed transition-colors">أحدث الوحدات المعروضة</a></li>
+            <li><a href="resale-deals.html" class="hover:text-primary-fixed transition-colors">لقطات ريسيل مخفضة</a></li>
+            <li><a href="sell-property.html" class="hover:text-primary-fixed transition-colors">اعرض شقتك للبيع</a></li>
+            <li><a href="about.html" class="hover:text-primary-fixed transition-colors">عن ستارت هومز</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Areas -->
+        <div>
+          <h4 class="text-sm font-bold text-pure-white mb-4">المناطق والكمبوندات</h4>
+          <ul class="space-y-2.5 text-xs text-surface-variant">
+            <li><a href="latest-units.html?city=مدينتي" class="hover:text-primary-fixed transition-colors">شقق وفلل مدينتي</a></li>
+            <li><a href="latest-units.html?city=الرحاب" class="hover:text-primary-fixed transition-colors">عقارات مدينة الرحاب</a></li>
+            <li><a href="latest-units.html?city=التجمع+الخامس" class="hover:text-primary-fixed transition-colors">عقارات التجمع الخامس</a></li>
+            <li><a href="latest-units.html?city=الشيخ+زايد" class="hover:text-primary-fixed transition-colors">عقارات الشيخ زايد</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact -->
+        <div>
+          <h4 class="text-sm font-bold text-pure-white mb-4">عنوان الفرع والتواصل</h4>
+          <div class="space-y-3 text-xs text-surface-variant">
+            <p class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-primary-fixed text-base shrink-0 mt-0.5">location_on</span>
+              <span><strong>East Hub building 18 office f11 madinaty</strong><br/>(إيست هب - مبنى 18 - مكتب F11 - مدينتي)</span>
+            </p>
+            <p class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary-fixed text-base">call</span>
+              <span>الخط الساخن: <strong>19xxx</strong></span>
+            </p>
+            <p class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary-fixed text-base">chat</span>
+              <span>واتساب خدمة العملاء: 01099887766</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-secondary">
+        <div>جميع الحقوق محفوظة لشركة ستارت هومز للتسويق العقاري © 2024 - 2026</div>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-primary-fixed transition-colors">الشروط والأحكام</a>
+          <a href="#" class="hover:text-primary-fixed transition-colors">سياسة الخصوصية</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="drawer-backdrop" class="fixed inset-0 modal-backdrop z-50 hidden transition-opacity"></div>
+  <div id="mobile-drawer" class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-pure-white z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+    <div class="p-6 border-b border-border-gray flex justify-between items-center">
+      <div class="font-extrabold text-xl text-on-surface flex items-center gap-2">
+        <span class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-black text-base">S</span>
+        <span>Start Homes</span>
+      </div>
+      <button id="drawer-close" class="p-1.5 text-secondary hover:text-on-surface">
+        <span class="material-symbols-outlined text-2xl">close</span>
+      </button>
+    </div>
+    <div class="p-6 flex-1 overflow-y-auto space-y-4">
+      
+      <!-- Theme Switcher in Mobile Drawer -->
+      <div class="flex items-center justify-between py-2 border-b border-border-gray">
+        <span class="text-xs font-bold text-on-surface">المظهر (Dark / Light)</span>
+        <button class="theme-toggle-btn p-2 rounded-lg text-secondary hover:text-primary bg-surface-container">
+          <span class="material-symbols-outlined theme-toggle-icon text-xl">dark_mode</span>
+        </button>
+      </div>
+
+      <a href="index.html" class="block font-bold text-primary py-2 border-b border-border-gray">الرئيسية</a>
+      <a href="latest-units.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">أحدث الوحدات</a>
+      <a href="resale-deals.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">لقطات ريسيل</a>
+      <a href="sell-property.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">اعرض شقتك للبيع</a>
+      <a href="about.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">عن الشركة</a>
+      <a href="contact.html" class="block font-semibold text-on-surface py-2 border-b border-border-gray">اتصل بنا</a>
+      
+      <div class="pt-6 space-y-3">
+        <button onclick="openWhatsAppLead()" class="w-full btn-primary py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined">chat</span>
+          <span>واتساب مباشر</span>
+        </button>
+        <a href="tel:19xxx" class="w-full btn-secondary py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined">call</span>
+          <span>اتصل بنا 19xxx</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Favorites Modal -->
+  <div id="favorites-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div id="favorites-modal-backdrop" class="fixed inset-0 modal-backdrop"></div>
+    <div class="relative z-10 bg-pure-white rounded-2xl max-w-xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-border-gray overflow-hidden">
+      <div class="p-5 border-b border-border-gray flex justify-between items-center bg-surface-bright">
+        <div class="flex items-center gap-2 font-bold text-on-surface text-base">
+          <span class="material-symbols-outlined text-primary">favorite</span>
+          <span>الوحدات المحفوظة في المفضلة</span>
+        </div>
+        <button id="favorites-modal-close" class="p-1 text-secondary hover:text-on-surface">
+          <span class="material-symbols-outlined text-2xl">close</span>
+        </button>
+      </div>
+      <div id="favorites-modal-list" class="p-5 overflow-y-auto space-y-3 flex-1"></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/data.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

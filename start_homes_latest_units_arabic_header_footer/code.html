@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>أحدث الوحدات | Start Homes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#191c1d",
+                        "secondary-fixed": "#e5e2e1",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-bright": "#f8f9fa",
+                        "pure-white": "#FFFFFF",
+                        "tertiary-container": "#8ab7e9",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "badge-gold-text": "#996515",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#32618f",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary": "#5f5e5e",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#ffe088",
+                        "outline-variant": "#d0c5af",
+                        "border-gray": "#E5E7EB",
+                        "inverse-primary": "#e9c349",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#554300",
+                        "on-primary-fixed": "#241a00",
+                        "surface-dim": "#d9dadb",
+                        "badge-gold-bg": "#FFF8E7",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-fixed-variant": "#134975",
+                        "outline": "#7f7663",
+                        "primary": "#735c00",
+                        "surface-container": "#edeeef",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#4d4635",
+                        "secondary-container": "#e5e2e1",
+                        "success-green": "#00C250",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary-fixed": "#d0e4ff",
+                        "on-background": "#191c1d",
+                        "on-secondary-fixed-variant": "#474646",
+                        "background": "#f8f9fa",
+                        "surface": "#f8f9fa",
+                        "on-secondary-container": "#656464",
+                        "on-tertiary-fixed": "#001d35",
+                        "primary-container": "#d4af37",
+                        "surface-variant": "#e1e3e4",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#104874",
+                        "tertiary-fixed-dim": "#9dcafe",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#574500",
+                        "surface-tint": "#735c00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base-unit": "8px",
+                        "container-max": "1200px",
+                        "gutter": "24px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Be Vietnam Pro"],
+                        "headline-lg": ["Be Vietnam Pro"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "headline-md": ["Be Vietnam Pro"],
+                        "body-sm": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-md": ["Be Vietnam Pro"],
+                        "display-lg": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f8f9fa; /* surface */
+            color: #191c1d; /* on-surface */
+        }
+        .btn-primary {
+            background-color: #d4af37;
+            color: #0d0d0d;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            filter: brightness(1.05);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 1.5px solid #191c1d;
+            color: #191c1d;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-secondary:hover {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+        .property-card {
+            background-color: #ffffff;
+            border: 1px solid #E5E7EB;
+            transition: all 0.3s ease-in-out;
+        }
+        .property-card:hover {
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+        }
+        .input-field {
+            background-color: #f8f9fa;
+            border: 1px solid #E5E7EB;
+            transition: border-color 0.2s ease-in-out;
+        }
+        .input-field:focus {
+            border-color: #d4af37;
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased pt-[80px]">
+<!-- TopNavBar -->
+<nav class="bg-pure-white/90 dark:bg-on-surface/90 backdrop-blur-md fixed top-0 w-full z-50 border-b border-border-gray dark:border-outline-variant">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 max-w-container-max mx-auto">
+<div class="flex items-center gap-6">
+<a class="font-headline-md text-headline-md font-bold text-on-surface dark:text-pure-white" href="#">
+                    Start Homes
+                </a>
+<!-- Desktop Nav -->
+<div class="hidden md:flex gap-8 ml-8">
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed-dim border-b-2 border-primary pb-1 hover:text-primary-container dark:hover:text-primary-fixed transition-colors duration-200 opacity-80 transition-all" href="#">أحدث الوحدات</a>
+<a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary-container dark:hover:text-primary-fixed transition-colors duration-200" href="#">لقطات ريسيل</a>
+<a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim hover:text-primary-container dark:hover:text-primary-fixed transition-colors duration-200" href="#">اعرض شقتك للبيع</a>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-4">
+<button class="btn-secondary px-6 py-2 rounded font-label-md text-label-md">اتصل بنا</button>
+<button class="btn-primary px-6 py-2 rounded font-label-md text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+                    WhatsApp
+                </button>
+</div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- Page Header -->
+<header class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-[64px] text-center">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-4">أحدث الوحدات في الرحاب ومدينتي</h1>
+<p class="font-body-lg text-body-lg text-secondary">اكتشف أحدث العقارات المضافة حديثاً بأفضل الأسعار</p>
+</header>
+<!-- Main Content -->
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pb-[64px] flex flex-col lg:flex-row gap-gutter">
+<!-- Filter Sidebar -->
+<aside class="w-full lg:w-[300px] shrink-0">
+<div class="bg-pure-white p-6 rounded-lg border border-border-gray sticky top-[100px]">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-border-gray pb-4">تصفية النتائج</h2>
+<div class="space-y-6">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">المنطقة</label>
+<select class="input-field w-full rounded p-3 font-body-sm text-body-sm">
+<option>الكل</option>
+<option>مدينتي</option>
+<option>الرحاب</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">نوع الوحدة</label>
+<select class="input-field w-full rounded p-3 font-body-sm text-body-sm">
+<option>شقة</option>
+<option>فيلا</option>
+<option>توين هاوس</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">السعر (ج.م)</label>
+<div class="flex gap-2">
+<input class="input-field w-full rounded p-3 font-body-sm text-body-sm" placeholder="من" type="number"/>
+<input class="input-field w-full rounded p-3 font-body-sm text-body-sm" placeholder="إلى" type="number"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">غرف النوم</label>
+<div class="flex gap-2 flex-wrap">
+<button class="px-4 py-2 rounded border border-border-gray hover:border-primary-container font-body-sm text-body-sm">1</button>
+<button class="px-4 py-2 rounded border border-border-gray hover:border-primary-container font-body-sm text-body-sm bg-primary-container/10 border-primary-container text-primary-container">2</button>
+<button class="px-4 py-2 rounded border border-border-gray hover:border-primary-container font-body-sm text-body-sm">3</button>
+<button class="px-4 py-2 rounded border border-border-gray hover:border-primary-container font-body-sm text-body-sm">+4</button>
+</div>
+</div>
+<button class="btn-primary w-full py-3 rounded font-label-md text-label-md mt-4">تطبيق الفلاتر</button>
+</div>
+</div>
+</aside>
+<!-- Property Grid -->
+<div class="flex-1">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-gutter">
+<!-- Card 1 -->
+<article class="property-card rounded-lg overflow-hidden flex flex-col">
+<div class="relative h-64 w-full">
+<img class="w-full h-full object-cover" data-alt="A modern luxury apartment interior in Madinaty, bright natural light, minimalist furnishings, wide angle view, high quality architectural photography style, light gray and white tones with subtle metallic gold accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFAf7A3dsVAP_qOcAjoy6z1Ml_dEQhpuuqd7ZBx5SGmlSVGyEFrt_IrYJ2QDdRW85fy9tWUuEnuOn_rI2hazFZnpWb5DIo3m_SLWFOe0DHeapw4a0aVCNRfVzBf4jeIE-5CWwvU5PJQRrKAI7t_RWRURt156upr8MiZNhXBabXLRwB2c3w3gH-t5wl9Ko2yle27AqOUXQcQ4UxyIzj2VHasWIvG7rQZ8tZxSFI322EtiRQ10xNd3Go"/>
+<div class="absolute top-4 right-4 bg-badge-gold-bg text-badge-gold-text px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">star</span>
+                            جديد
+                        </div>
+<div class="absolute bottom-4 right-4 bg-on-surface/80 text-pure-white px-3 py-1 rounded backdrop-blur-sm font-label-sm text-label-sm">
+                            مدينتي B12
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">شقة 165م² فيو مميز</h3>
+<div class="flex gap-4 text-secondary mb-4 font-body-sm text-body-sm border-b border-border-gray pb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bed</span> 3 غرف</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bathtub</span> 2 حمام</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">stairs</span> الدور 4</span>
+</div>
+<div class="mb-6 flex-1">
+<div class="font-headline-md text-headline-md text-on-surface">5,200,000 ج.م</div>
+<div class="font-body-sm text-body-sm text-secondary mt-1">مقدم: 1,500,000 ج.م</div>
+</div>
+<div class="flex gap-3 mt-auto">
+<button class="btn-secondary flex-1 py-2 rounded font-label-md text-label-md">التفاصيل</button>
+<button class="btn-primary w-12 flex items-center justify-center rounded"><span class="material-symbols-outlined">chat</span></button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="property-card rounded-lg overflow-hidden flex flex-col">
+<div class="relative h-64 w-full">
+<img class="w-full h-full object-cover" data-alt="A luxurious villa exterior in Al Rehab city, beautifully landscaped garden, sunny day, premium real estate photography, clean and modern aesthetic, bright whites and subtle warm lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdz1STDnWQ6xh5QcBptx1SgiB3cZMsqcbPkB6pHYXBgiT0kgdQSp6CFFFs6SkyHoqFDOBch3doBln7InokRRnXbRCWPP_x7Ji5tZwzhQ6GH3jeqqTTvJmrmZlNp0vD_aO23zdHE_jIvYbml69kBhScMLxm3DTN4XFMi9SHqq5QdoFRM_isF5nQ721v-Jg56FY8_jkEBWa0yG2kbJqBVGRyV_4ilwHeVXgiseQfOJY3WOyRtgpDXiE1"/>
+<div class="absolute top-4 right-4 bg-badge-gold-bg text-badge-gold-text px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">star</span>
+                            حصرية
+                        </div>
+<div class="absolute bottom-4 right-4 bg-on-surface/80 text-pure-white px-3 py-1 rounded backdrop-blur-sm font-label-sm text-label-sm">
+                            الرحاب المرحلة 9
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">فيلا مستقلة 350م² تشطيب الترا سوبر لوكس</h3>
+<div class="flex gap-4 text-secondary mb-4 font-body-sm text-body-sm border-b border-border-gray pb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bed</span> 5 غرف</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bathtub</span> 4 حمام</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">garage</span> جراج</span>
+</div>
+<div class="mb-6 flex-1">
+<div class="font-headline-md text-headline-md text-on-surface">22,000,000 ج.م</div>
+<div class="font-body-sm text-body-sm text-secondary mt-1">كاش</div>
+</div>
+<div class="flex gap-3 mt-auto">
+<button class="btn-secondary flex-1 py-2 rounded font-label-md text-label-md">التفاصيل</button>
+<button class="btn-primary w-12 flex items-center justify-center rounded"><span class="material-symbols-outlined">chat</span></button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="property-card rounded-lg overflow-hidden flex flex-col">
+<div class="relative h-64 w-full">
+<img class="w-full h-full object-cover" data-alt="A spacious living room in a Madinaty apartment, panoramic windows showing city view, elegant minimalist decor, bright lighting, high contrast modern style, whites and light grays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL5I6ZXXWlCkxBaoKzhH8P6RQ7jyy5hJemwm_s9DrDGiSxbbk1iYZPYVip5dYR32ALHRc6omBSH5a0DUtplXTW8R996N37fSH29DK2bryaEQU9b2zjNGCFkG5rrfMRvhaDNejjp9ps9P3pn4lVQeWj2Pmg9qAmiaXeRgM9MuY3eK1kMvhbs5vmC3f-hUEf_OLlV3Ie4Tn3TZHN7xDg8qj0nneJU4tO18t4cDTd84IQpZmVvJLvbKwv"/>
+<div class="absolute bottom-4 right-4 bg-on-surface/80 text-pure-white px-3 py-1 rounded backdrop-blur-sm font-label-sm text-label-sm">
+                            مدينتي B8
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">شقة 140م² بحري بالكامل</h3>
+<div class="flex gap-4 text-secondary mb-4 font-body-sm text-body-sm border-b border-border-gray pb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bed</span> 3 غرف</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bathtub</span> 2 حمام</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">stairs</span> الدور 2</span>
+</div>
+<div class="mb-6 flex-1">
+<div class="font-headline-md text-headline-md text-on-surface">4,500,000 ج.م</div>
+<div class="font-body-sm text-body-sm text-secondary mt-1">مقدم: 2,000,000 ج.م</div>
+</div>
+<div class="flex gap-3 mt-auto">
+<button class="btn-secondary flex-1 py-2 rounded font-label-md text-label-md">التفاصيل</button>
+<button class="btn-primary w-12 flex items-center justify-center rounded"><span class="material-symbols-outlined">chat</span></button>
+</div>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="property-card rounded-lg overflow-hidden flex flex-col">
+<div class="relative h-64 w-full">
+<img class="w-full h-full object-cover" data-alt="A sleek, modern kitchen in an Al Rehab apartment, high-end appliances, marble countertops, bright and airy feel, professional interior photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB02AB12f_DVlvkJ_pjOmRI6LqXPL8NFa2PmW3V59CmH4_Q9-agh6nDm6Bi1RLrFFNzg9s5mAowQHwl-3P2dlXnqfZIoAgiFPy9a8tF09H0LCW3kW9RQjL2M3roH3FZCFgFLT6fXtMz0x5afsU_iYIz-X3J9_kbQmHrv0uuqELGK6PtlKkZtqG36GE2-s_iOOuYxIiq6Kg5TrMak-nsmZoX1Fu1R-rTh9G2zjWyLRnbuxSdXhnzaMfG"/>
+<div class="absolute top-4 right-4 bg-badge-gold-bg text-badge-gold-text px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">star</span>
+                            لقطة
+                        </div>
+<div class="absolute bottom-4 right-4 bg-on-surface/80 text-pure-white px-3 py-1 rounded backdrop-blur-sm font-label-sm text-label-sm">
+                            الرحاب المرحلة 5
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">شقة 180م² بالقرب من السوق الشرقي</h3>
+<div class="flex gap-4 text-secondary mb-4 font-body-sm text-body-sm border-b border-border-gray pb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bed</span> 3 غرف</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bathtub</span> 3 حمام</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">stairs</span> الدور 1</span>
+</div>
+<div class="mb-6 flex-1">
+<div class="font-headline-md text-headline-md text-on-surface">6,800,000 ج.م</div>
+<div class="font-body-sm text-body-sm text-secondary mt-1">كاش</div>
+</div>
+<div class="flex gap-3 mt-auto">
+<button class="btn-secondary flex-1 py-2 rounded font-label-md text-label-md">التفاصيل</button>
+<button class="btn-primary w-12 flex items-center justify-center rounded"><span class="material-symbols-outlined">chat</span></button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-2 mt-12">
+<button class="w-10 h-10 rounded border border-border-gray flex items-center justify-center hover:border-primary-container text-secondary"><span class="material-symbols-outlined">chevron_right</span></button>
+<button class="w-10 h-10 rounded bg-primary-container text-on-primary-fixed font-label-md text-label-md flex items-center justify-center">1</button>
+<button class="w-10 h-10 rounded border border-border-gray hover:border-primary-container font-label-md text-label-md flex items-center justify-center">2</button>
+<button class="w-10 h-10 rounded border border-border-gray hover:border-primary-container font-label-md text-label-md flex items-center justify-center">3</button>
+<span class="text-secondary">...</span>
+<button class="w-10 h-10 rounded border border-border-gray flex items-center justify-center hover:border-primary-container text-secondary"><span class="material-symbols-outlined">chevron_left</span></button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-on-surface dark:bg-surface-container-lowest border-t border-outline-variant dark:border-border-gray w-full py-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div>
+<div class="font-headline-lg text-headline-lg text-primary-fixed dark:text-primary mb-4">Start Homes</div>
+<p class="font-body-sm text-body-sm text-secondary-fixed-dim">© 2024 Start Homes. All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body-sm text-body-sm text-secondary-fixed-dim hover:text-primary-fixed transition-colors duration-200" href="#">عن ستارت هومز</a>
+<a class="font-body-sm text-body-sm text-primary-fixed font-bold hover:text-primary-fixed transition-colors duration-200" href="#">أحدث الوحدات</a>
+<a class="font-body-sm text-body-sm text-secondary-fixed-dim hover:text-primary-fixed transition-colors duration-200" href="#">لقطات ريسيل</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body-sm text-body-sm text-secondary-fixed-dim hover:text-primary-fixed transition-colors duration-200" href="#">اعرض شقتك للبيع</a>
+<a class="font-body-sm text-body-sm text-secondary-fixed-dim hover:text-primary-fixed transition-colors duration-200" href="#">سياسة الخصوصية</a>
+<a class="font-body-sm text-body-sm text-secondary-fixed-dim hover:text-primary-fixed transition-colors duration-200" href="#">اتصل بنا</a>
+</div>
+<div class="flex items-start justify-end gap-4">
+<!-- Social placeholders if needed -->
+</div>
+</div>
+</footer>
+</body></html>

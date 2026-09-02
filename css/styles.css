@@ -1,0 +1,276 @@
+/* Start Homes - Modern Estate Narrative Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap');
+
+:root {
+  --primary-gold: #d4af37;
+  --primary-gold-dark: #735c00;
+  --pure-white: #ffffff;
+  --surface-bg: #f8f9fa;
+  --surface-dim: #edeeef;
+  --jet-black: #191c1d;
+  --text-secondary: #5f5e5e;
+  --border-gray: #e5e7eb;
+  --success-green: #00c250;
+  --navy-blue: #275885;
+}
+
+body {
+  font-family: 'Cairo', 'Be Vietnam Pro', 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--surface-bg);
+  color: var(--jet-black);
+  direction: rtl;
+  text-align: right;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode theme styles */
+html.dark {
+  color-scheme: dark;
+}
+html.dark body {
+  background-color: #121516;
+  color: #f0f1f2;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+html.dark ::-webkit-scrollbar-track {
+  background: #1a1d20;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b5952c;
+}
+
+/* Button & Card Glow Effects */
+.btn-primary {
+  background-color: #d4af37;
+  color: #191c1d;
+  font-weight: 700;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-primary:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+  background-color: #dfbe4a;
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1.5px solid #191c1d;
+  color: #191c1d;
+  font-weight: 600;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+html.dark .btn-secondary {
+  border-color: #d0c5af;
+  color: #f0f1f2;
+}
+.btn-secondary:hover {
+  background-color: #191c1d;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(25, 28, 29, 0.15);
+}
+html.dark .btn-secondary:hover {
+  background-color: #d4af37;
+  color: #191c1d;
+  border-color: #d4af37;
+}
+
+.btn-gold-glow {
+  transition: all 0.3s ease;
+}
+.btn-gold-glow:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  filter: brightness(1.05);
+}
+
+.hover-gold-glow {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hover-gold-glow:hover {
+  border-color: #d4af37 !important;
+  box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.2), 0 8px 10px -6px rgba(212, 175, 55, 0.1);
+  transform: translateY(-3px);
+}
+
+.property-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+html.dark .property-card {
+  background-color: #1a1e21;
+  border-color: #2e353b;
+}
+.property-card:hover {
+  border-color: #d4af37 !important;
+  box-shadow: 0 12px 28px -6px rgba(212, 175, 55, 0.18), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-4px);
+}
+
+.input-field {
+  background-color: #f8f9fa;
+  border: 1px solid #e5e7eb;
+  color: #191c1d;
+  transition: all 0.2s ease-in-out;
+}
+html.dark .input-field {
+  background-color: #22272b;
+  border-color: #383f47;
+  color: #f0f1f2;
+}
+.input-field:focus {
+  border-color: #d4af37 !important;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+  outline: none;
+}
+html.dark .input-field:focus {
+  background-color: #282f35;
+}
+
+/* Badge Styles */
+.badge-gold {
+  background-color: #fff8e7;
+  color: #996515;
+  border: 1px solid #f2e2be;
+}
+html.dark .badge-gold {
+  background-color: rgba(212, 175, 55, 0.15);
+  color: #ffe088;
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.badge-green {
+  background-color: #e6f9ed;
+  color: #008738;
+  border: 1px solid #b8ebd0;
+}
+html.dark .badge-green {
+  background-color: rgba(0, 194, 80, 0.15);
+  color: #55e690;
+  border-color: rgba(0, 194, 80, 0.3);
+}
+
+.badge-navy {
+  background-color: #e8eff6;
+  color: #275885;
+  border: 1px solid #c4d7e8;
+}
+html.dark .badge-navy {
+  background-color: rgba(50, 97, 143, 0.2);
+  color: #9dcafe;
+  border-color: rgba(50, 97, 143, 0.4);
+}
+
+/* Image zoom on hover inside cards */
+.img-zoom-container {
+  overflow: hidden;
+}
+.img-zoom-container img {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.property-card:hover .img-zoom-container img,
+.hover-gold-glow:hover .img-zoom-container img {
+  transform: scale(1.06);
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s ease-out forwards;
+}
+
+/* Toast styling */
+#toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  min-width: 280px;
+  max-width: 400px;
+  background: #191c1d;
+  color: #ffffff;
+  padding: 14px 18px;
+  border-radius: 8px;
+  border-right: 4px solid #d4af37;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: fadeIn 0.3s ease-out;
+}
+html.dark .toast {
+  background: #252b30;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Backdrop Blur */
+.modal-backdrop {
+  backdrop-filter: blur(8px);
+  background-color: rgba(18, 21, 22, 0.75);
+}
+
+/* Glass Header */
+.glass-header {
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+html.dark .glass-header {
+  background-color: rgba(18, 21, 22, 0.94);
+  border-color: #2a3138;
+}
+
+/* Dark mode generic overrides */
+html.dark .bg-pure-white {
+  background-color: #1a1e21 !important;
+}
+html.dark .bg-surface-bright,
+html.dark .bg-surface {
+  background-color: #141719 !important;
+}
+html.dark .bg-surface-container-low {
+  background-color: #22272b !important;
+}
+html.dark .bg-surface-container,
+html.dark .bg-surface-container-high {
+  background-color: #282f35 !important;
+}
+html.dark .border-border-gray {
+  border-color: #2c333a !important;
+}
+html.dark .text-on-surface {
+  color: #f0f1f2 !important;
+}
+html.dark .text-secondary {
+  color: #a4abb3 !important;
+}
+html.dark .text-on-surface-variant {
+  color: #c9d0d8 !important;
+}
